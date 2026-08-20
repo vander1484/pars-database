@@ -1,10 +1,8 @@
-import Link from "next/link";
-
 const sections = [
-  { title: "Players", text: "Every player, appearance and goal in one searchable archive.", href: "/players" },
-  { title: "Matches", text: "Browse more than a century of Dunfermline Athletic results.", href: "/matches" },
-  { title: "Seasons", text: "Explore results, squads, tables and cup runs season by season.", href: "/seasons" },
-  { title: "Competitions", text: "League, Scottish Cup, League Cup, Europe and more.", href: "/competitions" },
+  { title: "Players", text: "Every player, appearance and goal in one searchable archive.", href: "/pars-database/players/" },
+  { title: "Matches", text: "Browse more than a century of Dunfermline Athletic results.", href: "/pars-database/matches/" },
+  { title: "Seasons", text: "Explore results, squads, tables and cup runs season by season.", href: "/pars-database/seasons/" },
+  { title: "Competitions", text: "League, Scottish Cup, League Cup, Europe and more.", href: "/pars-database/competitions/" },
 ];
 
 export default function Home() {
@@ -12,8 +10,8 @@ export default function Home() {
     <main>
       <section className="hero">
         <nav className="nav">
-          <Link className="brand" href="/">PARS<span>DATABASE</span></Link>
-          <div><Link href="/players">Players</Link><Link href="/matches">Matches</Link><Link href="/seasons">Seasons</Link><Link href="/records">Records</Link></div>
+          <a className="brand" href="/pars-database/">PARS<span>DATABASE</span></a>
+          <div><a href="/pars-database/players/">Players</a><a href="/pars-database/matches/">Matches</a><a href="/pars-database/seasons/">Seasons</a><a href="/pars-database/records/">Records</a></div>
         </nav>
         <div className="heroContent">
           <p className="eyebrow">DUNFERMLINE ATHLETIC • HISTORICAL ARCHIVE</p>
@@ -23,7 +21,7 @@ export default function Home() {
         </div>
       </section>
       <section className="stats"><div><strong>1912</strong><span>Archive begins</span></div><div><strong>100+</strong><span>Seasons</span></div><div><strong>DAFC</strong><span>One complete history</span></div></section>
-      <section className="explore"><p className="eyebrow dark">EXPLORE THE ARCHIVE</p><h2>A century of Pars history,<br/>properly connected.</h2><div className="grid">{sections.map((item, i) => <Link className="card" href={item.href} key={item.title}><span>0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p><b>Explore →</b></Link>)}</div></section>
+      <section className="explore"><p className="eyebrow dark">EXPLORE THE ARCHIVE</p><h2>A century of Pars history,<br/>properly connected.</h2><div className="grid">{sections.map((item, i) => <a className="card" href={item.href} key={item.title}><span>0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p><b>Explore →</b></a>)}</div></section>
     </main>
   );
 }
