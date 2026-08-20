@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id            Int          @id @default(autoincrement())
+  slug          String       @unique
+  name          String
+  position      String?
+  joinedOn      DateTime?
+  leftOn        DateTime?
+  previousClub  String?
+  nextClub      String?
+  notes         String?
+  appearances   Appearance[]
+  goals         Goal[]
+  sources       SourceRecord[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model Club {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  name        String    @unique
+  homeMatches Match[]   @relation("HomeClub")
+  awayMatches Match[]   @relation("AwayClub")
+  tableRows   LeagueTableEntry[]
+}
+
+model Season {
+  id           Int                 @id @default(autoincrement())
+  slug         String              @unique
+  label        String              @unique
+  startYear    Int
+  endYear      Int
+  matches      Match[]
+  competitions CompetitionSeason[]
+  tableRows    LeagueTableEntry[]
+  honours      Honour[]
+}
+
+model Competition {
+  id       Int                 @id @default(autoincrement())
+  slug     String              @unique
+  name     String              @unique
+  type     CompetitionType
+  seasons  CompetitionSeason[]
+}
+
+enum CompetitionType {
+  LEAGUE
+  CUP
+  EUROPE
+  FRIENDLY
+  OTHER
+}
+
+model CompetitionSeason {
+  id            Int          @id @default(autoincrement())
+  competitionId Int
+  seasonId      Int
+  displayName   String?
+  tier          Int?
+  competition   Competition  @relation(fields: [competitionId], references: [id])
+  season        Season       @relation(fields: [seasonId], references: [id])
+  matches       Match[]
+  @@unique([competitionId, seasonId])
+}
+
+model Match {
+  id                    Int               @id @default(autoincrement())
+  playedOn              DateTime?
+  seasonId              Int
+  competitionSeasonId   Int?
+  round                  String?
+  homeClubId             Int
+  awayClubId             Int
+  homeScore              Int?
+  awayScore              Int?
+  attendance             Int?
+  venue                   String?
+  notes                   String?
+  sourceUrl               String?
+  season                  Season            @relation(fields: [seasonId], references: [id])
+  competitionSeason      CompetitionSeason? @relation(fields: [competitionSeasonId], references: [id])
+  homeClub                Club              @relation("HomeClub", fields: [homeClubId], references: [id])
+  awayClub                Club              @relation("AwayClub", fields: [awayClubId], references: [id])
+  appearances             Appearance[]
+  goals                   Goal[]
+  @@index([seasonId, playedOn])
+}
+
+model Appearance {
+  id          Int      @id @default(autoincrement())
+  matchId     Int
+  playerId    Int
+  starter     Boolean  @default(true)
+  substitute Boolean  @default(false)
+  shirtNumber Int?
+  match       Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  player      Player   @relation(fields: [playerId], references: [id])
+  @@unique([matchId, playerId])
+}
+
+model Goal {
+  id        Int      @id @default(autoincrement())
+  matchId   Int
+  playerId  Int
+  minute    Int?
+  ownGoal   Boolean  @default(false)
+  penalty   Boolean  @default(false)
+  match     Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  player    Player   @relation(fields: [playerId], references: [id])
+}
+
+model LeagueTableEntry {
+  id        Int     @id @default(autoincrement())
+  seasonId  Int
+  clubId    Int
+  position  Int
+  played    Int
+  won       Int
+  drawn     Int
+  lost      Int
+  goalsFor  Int?
+  goalsAgainst Int?
+  points     Int
+  season    Season  @relation(fields: [seasonId], references: [id])
+  club      Club    @relation(fields: [clubId], references: [id])
+  @@unique([seasonId, clubId])
+}
+
+model Honour {
+  id        Int     @id @default(autoincrement())
+  seasonId  Int?
+  title     String
+  detail    String?
+  season    Season? @relation(fields: [seasonId], references: [id])
+}
+
+model SourceRecord {
+  id          Int      @id @default(autoincrement())
+  playerId    Int?
+  sourceUrl   String
+  sourceType  String
+  sourceKey   String?
+  rawData     Json?
+  uncertain   Boolean  @default(false)
+  note        String?
+  player      Player?  @relation(fields: [playerId], references: [id])
+  importedAt  DateTime @default(now())
+}
