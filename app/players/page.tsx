@@ -1,33 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-type Player = { id: number; slug: string; name: string; position: string | null };
+type Player = { id:number; slug:string; name:string; position:string|null; notes:string|null; appearances?:{count:number}[]; goals?:{count:number}[] };
+const SUPABASE_URL="https://uwhewuwnrcvrnclfzoge.supabase.co";
+const SUPABASE_KEY="sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT";
 
-const SUPABASE_URL = "https://uwhewuwnrcvrnclfzoge.supabase.co";
-const SUPABASE_KEY = "sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT";
+function positionGroup(value:string|null){const p=(value||"").toLowerCase();if(p.includes("goalkeeper"))return "Goalkeeper";if(p.includes("defender")||p.includes("defence"))return "Defender";if(p.includes("midfield"))return "Midfielder";if(p.includes("forward")||p.includes("striker"))return "Forward";return "Unknown";}
+function years(notes:string|null){const ys=(notes||"").match(/(?:19|20)\d{2}/g)||[];return ys.length?`${ys[0]}${ys.length>1?` to ${ys[ys.length-1]}`:""}`:"Not recorded";}
+function playedSeason(notes:string|null,season:string){if(!season)return true;const y=Number(season);const nums=((notes||"").match(/(?:19|20)\d{2}/g)||[]).map(Number);if(!nums.length)return false;return y>=Math.min(...nums)&&y<=Math.max(...nums);}
 
-export default function Players() {
-  const [players, setPlayers] = useState<Player[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`${SUPABASE_URL}/rest/v1/players?select=id,slug,name,position&order=name.asc`, {
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
-    })
-      .then(r => r.ok ? r.json() : Promise.reject(new Error("Database request failed")))
-      .then(setPlayers)
-      .finally(() => setLoading(false));
-  }, []);
-
-  return <main className="archivePage">
-    <header className="archiveNav"><Link className="brand" href="/">PARS<span>DATABASE</span></Link><Link href="/">← Home</Link></header>
-    <section className="archiveHero"><p className="eyebrow">THE PEOPLE BEHIND THE PARS</p><h1>Players</h1><p>Explore Dunfermline Athletic players across the club's history. This page reads directly from the live Pars Database.</p></section>
-    <section className="archiveContent">
-      <div className="archiveToolbar"><h2>Player archive</h2><span>{loading ? "Loading live records…" : `${players.length} records imported`}</span></div>
-      <div className="dataList">{players.map((player,i)=><div className="dataRow" key={player.id}><span>{String(i+1).padStart(3,"0")}</span><strong>{player.name}</strong><small>{player.position || "Historical player record"}</small><b>→</b></div>)}</div>
-      {!loading && players.length === 0 && <p className="migrationNote">No player records were returned by the live database.</p>}
-    </section>
-  </main>;
+export default function Players(){
+ const [players,setPlayers]=useState<Player[]>([]),[loading,setLoading]=useState(true),[search,setSearch]=useState(""),[position,setPosition]=useState(""),[season,setSeason]=useState(""),[sort,setSort]=useState("name");
+ useEffect(()=>{fetch(`${SUPABASE_URL}/rest/v1/players?select=id,slug,name,position,notes&order=name.asc`,{headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}}).then(r=>r.ok?r.json():Promise.reject()).then(setPlayers).finally(()=>setLoading(false));},[]);
+ const seasons=useMemo(()=>Array.from({length:93},(_,i)=>2024-i),[]);
+ const filtered=useMemo(()=>players.filter(p=>(!search||p.name.toLowerCase().includes(search.toLowerCase()))&&(!position||positionGroup(p.position)===position)&&playedSeason(p.notes,season)).sort((a,b)=>sort==="position"?positionGroup(a.position).localeCompare(positionGroup(b.position)):sort==="recent"?years(b.notes).localeCompare(years(a.notes)):a.name.localeCompare(b.name)),[players,search,position,season,sort]);
+ return <main className="archivePage"><header className="archiveNav"><Link className="brand" href="/">PARS<span>DATABASE</span></Link><Link href="/">← Home</Link></header><section className="archiveHero playerHero"><p className="eyebrow">THE PEOPLE BEHIND THE PARS</p><h1>Players</h1><p>Search and explore the people who have represented Dunfermline Athletic across the club's history.</p></section><section className="archiveContent"><div className="archiveToolbar"><div><h2>Player archive</h2><span className="resultCount">{loading?"Loading live records…":`${filtered.length} of ${players.length} players`}</span></div></div><div className="filterPanel"><label className="searchField"><span>Search</span><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search player name…"/></label><label><span>Position</span><select value={position} onChange={e=>setPosition(e.target.value)}><option value="">All positions</option><option>Goalkeeper</option><option>Defender</option><option>Midfielder</option><option>Forward</option><option>Unknown</option></select></label><label><span>Season played</span><select value={season} onChange={e=>setSeason(e.target.value)}><option value="">All seasons</option>{seasons.map(y=><option value={y} key={y}>{y}/{String(y+1).slice(-2)}</option>)}</select></label><label><span>Sort by</span><select value={sort} onChange={e=>setSort(e.target.value)}><option value="name">Name A to Z</option><option value="position">Position</option><option value="recent">Most recent</option></select></label><button className="clearFilters" onClick={()=>{setSearch("");setPosition("");setSeason("");setSort("name")}}>Clear</button></div><div className="playerTable"><div className="playerTableHead"><span>Player</span><span>Position</span><span>Years active</span><span>Apps</span><span>Goals</span><span></span></div>{filtered.map(p=><Link className="playerTableRow" href={`/players/${p.slug}/`} key={p.id}><strong>{p.name}</strong><span className="positionPill">{positionGroup(p.position)}</span><span>{years(p.notes)}</span><span className="statPending">–</span><span className="statPending">–</span><b>→</b></Link>)}</div><p className="migrationNote"><strong>Appearances and goals:</strong> these columns will populate as the match-level appearance and scorer records are linked. They are deliberately left blank rather than displaying invented totals.</p></section></main>;
 }
