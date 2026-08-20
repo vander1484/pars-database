@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
+const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
+
 const nextConfig = {
-  output: 'export',
-  basePath: '/pars-database',
-  assetPrefix: '/pars-database/',
-  trailingSlash: true,
-  images: { unoptimized: true },
+  ...(isGitHubPages ? { output: 'export' } : {}),
+  basePath: isGitHubPages ? '/pars-database' : '',
+  assetPrefix: isGitHubPages ? '/pars-database/' : '',
+  trailingSlash: isGitHubPages,
+  images: { unoptimized: isGitHubPages },
 };
 
 export default nextConfig;
