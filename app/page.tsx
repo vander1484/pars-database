@@ -1,28 +1,7 @@
+"use client";
 import Link from "next/link";
-
-const sections = [
-  { title: "Players", text: "Every player, appearance and goal in one searchable archive.", href: "/players" },
-  { title: "Matches", text: "Browse more than a century of Dunfermline Athletic results.", href: "/matches" },
-  { title: "Seasons", text: "Explore results, squads, tables and cup runs season by season.", href: "/seasons" },
-  { title: "Competitions", text: "League, Scottish Cup, League Cup, Europe and more.", href: "/competitions" },
-];
-
-export default function Home() {
-  return (
-    <main>
-      <section className="hero">
-        <nav className="nav">
-          <Link className="brand" href="/">PARS<span>DATABASE</span></Link>
-          <div><Link href="/players">Players</Link><Link href="/matches">Matches</Link><Link href="/seasons">Seasons</Link><Link href="/records">Records</Link></div>
-        </nav>
-        <div className="heroContent">
-          <p className="eyebrow">DUNFERMLINE ATHLETIC • HISTORICAL ARCHIVE</p>
-          <h1>Every player.<br />Every match.<br /><em>Every season.</em></h1>
-          <p className="intro">The complete statistical history of Dunfermline Athletic, rebuilt as a modern, searchable football archive.</p>
-        </div>
-      </section>
-      <section className="stats"><div><strong>1912</strong><span>Archive begins</span></div><div><strong>100+</strong><span>Seasons</span></div><div><strong>DAFC</strong><span>One complete history</span></div></section>
-      <section className="explore"><p className="eyebrow dark">EXPLORE THE ARCHIVE</p><h2>A century of Pars history,<br/>properly connected.</h2><div className="grid">{sections.map((item, i) => <Link className="card" href={item.href} key={item.title}><span>0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p><b>Explore →</b></Link>)}</div></section>
-    </main>
-  );
-}
+import {FormEvent,useEffect,useState} from "react";
+import {useRouter} from "next/navigation";
+const U="https://uwhewuwnrcvrnclfzoge.supabase.co",K="sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT",H={apikey:K,Authorization:`Bearer ${K}`};
+const sections=[{title:"Players",text:"Search careers, appearances, goals and season records.",href:"/players"},{title:"Matches",text:"Find results by season, opponent and competition.",href:"/matches"},{title:"Seasons",text:"Tables, squads and results in one season dashboard.",href:"/seasons"},{title:"Records",text:"The biggest numbers and milestones in Pars history.",href:"/records"}];
+export default function Home(){const router=useRouter(),[q,setQ]=useState(''),[counts,setCounts]=useState({players:'—',matches:'—',seasons:'—'});useEffect(()=>{Promise.all(['players','matches','seasons'].map(t=>fetch(`${U}/rest/v1/${t}?select=id`,{headers:{...H,Prefer:'count=exact'},method:'HEAD'}))).then(rs=>setCounts({players:rs[0].headers.get('content-range')?.split('/')[1]||'—',matches:rs[1].headers.get('content-range')?.split('/')[1]||'—',seasons:rs[2].headers.get('content-range')?.split('/')[1]||'—'})).catch(()=>{})},[]);function submit(e:FormEvent){e.preventDefault();if(q.trim())router.push(`/search/?q=${encodeURIComponent(q.trim())}`)}return <main><section className="hero"><div className="heroContent"><p className="eyebrow">DUNFERMLINE ATHLETIC · HISTORICAL ARCHIVE</p><h1>Every player.<br/>Every match.<br/><em>Every season.</em></h1><p className="intro">Explore more than a century of Dunfermline Athletic history through one connected statistical archive.</p><form className="heroSearch" onSubmit={submit}><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search a player, season or opponent…"/><button>Search archive →</button></form><div className="searchExamples">Try <Link href="/search/?q=Cardle">Cardle</Link><Link href="/search/?q=2016">2016</Link><Link href="/search/?q=Raith">Raith Rovers</Link></div></div></section><section className="stats liveStats"><div><strong>{counts.players}</strong><span>Players</span></div><div><strong>{counts.matches}</strong><span>Matches</span></div><div><strong>{counts.seasons}</strong><span>Seasons indexed</span></div></section><section className="explore"><div className="sectionIntro"><p className="eyebrow dark">EXPLORE THE ARCHIVE</p><h2>Pars history,<br/>properly connected.</h2><p>Move from a player to a season, from a season to a match, and back again without losing the story.</p></div><div className="grid">{sections.map((item,i)=><Link className="card" href={item.href} key={item.title}><span>0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p><b>Explore →</b></Link>)}</div></section></main>}
