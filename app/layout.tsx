@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./qa-fixes.css";
 import SiteHeader from "./components/SiteHeader";
 
 export const metadata = {
