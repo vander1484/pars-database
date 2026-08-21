@@ -38,3 +38,5 @@ The legacy site is treated as a read-only source. Data is first collected into s
 ## Status
 
 Initial project scaffold and migration design in progress.
+
+Deployment refresh triggered for the latest UI QA fixes.
