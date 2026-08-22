@@ -8,13 +8,17 @@ const aliases:Record<string,string>={
   "Dundee":"Dundee FC",
   "East Stirling":"East Stirlingshire",
   "Heart of Midlothian":"Heart of Midlothian FC",
-  "Queen of the South":"Queen of the South FC",
+  "Queen of the South":"Queen of the South",
   "FH Hafnarfjordur":"FH",
   "Genclerbirligi":"Genclerbirligi",
   "Steaua Bucharest":"FCSB",
-  "Queen's Park":"Queen's Park FC"
+  "Queen's Park":"Queen's Park"
 };
-const CACHE_VERSION='v3';
+const sportsDbIds:Record<string,string>={
+  "Queen of the South":"134305",
+  "Queen's Park":"138105"
+};
+const CACHE_VERSION='v4';
 function keyFor(name:string){return `pars-badge-${CACHE_VERSION}:${name.toLowerCase()}`}
 let queue:Promise<unknown>=Promise.resolve();
 function scheduled<T>(fn:()=>Promise<T>):Promise<T>{const run=queue.then(()=>new Promise<void>(r=>setTimeout(r,180))).then(fn);queue=run.catch(()=>undefined);return run}
@@ -24,12 +28,15 @@ async function lookup(name:string){
   if(typeof window!=="undefined"){const stored=window.localStorage.getItem(keyFor(name));if(stored){memory.set(name,stored);return stored}}
   if(inflight.has(name))return inflight.get(name)!;
   const p=scheduled(async()=>{try{
-    const term=aliases[name]||name;
-    const r=await fetch(`https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${encodeURIComponent(term)}`,{cache:'force-cache'});
+    const fixedId=sportsDbIds[name];
+    const endpoint=fixedId
+      ?`https://www.thesportsdb.com/api/v1/json/123/lookupteam.php?id=${fixedId}`
+      :`https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${encodeURIComponent(aliases[name]||name)}`;
+    const r=await fetch(endpoint,{cache:'force-cache'});
     if(!r.ok)return null;
     const data=await r.json();const teams=((data?.teams||[]) as TeamResult[]).filter(t=>!t.strSport||t.strSport==='Soccer');
-    const wanted=[norm(name),norm(term)];
-    const team=teams.find(t=>wanted.includes(norm(t.strTeam||''))||wanted.includes(norm(t.strTeamAlternate||'')))||null;
+    const term=aliases[name]||name;const wanted=[norm(name),norm(term)];
+    const team=fixedId?(teams[0]||null):(teams.find(t=>wanted.includes(norm(t.strTeam||''))||wanted.includes(norm(t.strTeamAlternate||'')))||null);
     const url=team?.strBadge||team?.strLogo||null;
     if(url){memory.set(name,url);if(typeof window!=="undefined")window.localStorage.setItem(keyFor(name),url)}
     return url;
