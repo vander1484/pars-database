@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const honours = [
-  { title: "Scottish Cup", lines: ["Winners (2): 1960–61, 1967–68", "Runners-up (4): 1964–65, 2003–04, 2006–07, 2025–26"] },
+  { title: "Scottish Cup", lines: ["Winners (2): 1960–61, 1967–68", "Runners-up (4): 1964–65, 2003–04, 2006–07, 2025–26"], trophy: "https://widgets.scottishfa.co.uk/360/360_assets/sfa%20v4/images/Scottish%20Cup%20360%20rotation1.jpg", trophyAlt: "Scottish Cup trophy" },
   { title: "Scottish League Cup", lines: ["Runners-up (3): 1949–50, 1991–92, 2005–06"] },
-  { title: "Scottish Championship · second tier", lines: ["Champions (4): 1925–26, 1988–89, 1995–96, 2010–11", "Runners-up (9): 1912–13, 1933–34, 1954–55, 1957–58, 1972–73, 1986–87, 1993–94, 1994–95, 1999–2000"] },
-  { title: "Scottish League One · third tier", lines: ["Champions (3): 1985–86, 2015–16, 2022–23", "Runners-up (2): 1978–79, 2013–14"] },
+  { title: "Scottish Championship · second tier", lines: ["Champions (4): 1925–26, 1988–89, 1995–96, 2010–11", "Runners-up (9): 1912–13, 1933–34, 1954–55, 1957–58, 1972–73, 1986–87, 1993–94, 1994–95, 1999–2000"], trophy: "https://spfl.co.uk/cms-content/images/shares/posts/archive/067_324__hearts_1430588070_standard.jpg", trophyAlt: "Scottish Championship trophy" },
+  { title: "Scottish League One · third tier", lines: ["Champions (3): 1985–86, 2015–16, 2022–23", "Runners-up (2): 1978–79, 2013–14"], trophy: "https://spfl.co.uk/cms-content/images/shares/posts/archive/067_324__hearts_1430588070_standard.jpg", trophyAlt: "SPFL league championship trophy" },
   { title: "Scottish Challenge Cup", lines: ["Runners-up (1): 2007–08"] },
 ];
 
@@ -30,7 +30,7 @@ export default function Records(){
         <a href="#honours" className="dataRow" style={{display:'inline-flex',width:'auto',padding:'.8rem 1rem'}}>Honours</a>
         <a href="#records" className="dataRow" style={{display:'inline-flex',width:'auto',padding:'.8rem 1rem'}}>Records</a>
       </nav>
-      <section id="honours" style={{marginBottom:'4rem',scrollMarginTop:'2rem'}}><p className="eyebrow">HONOURS</p><h2>Major & minor honours</h2><div className="dataList">{honours.map((h,i)=><div className="dataRow" key={h.title}><span>{String(i+1).padStart(2,'0')}</span><strong>{h.title}</strong><small>{h.lines.map(line=><span key={line} style={{display:'block'}}>{line}</span>)}</small></div>)}</div></section>
+      <section id="honours" style={{marginBottom:'4rem',scrollMarginTop:'2rem'}}><p className="eyebrow">HONOURS</p><h2>Major & minor honours</h2><div className="dataList">{honours.map((h,i)=><div className="dataRow" key={h.title} style={{alignItems:'center'}}><span>{String(i+1).padStart(2,'0')}</span>{h.trophy?<span style={{width:'72px',height:'72px',display:'grid',placeItems:'center',background:'#fff',border:'1px solid rgba(0,0,0,.12)',borderRadius:'10px',overflow:'hidden',flex:'0 0 72px'}}><img src={h.trophy} alt={h.trophyAlt} loading="lazy" style={{width:'100%',height:'100%',objectFit:'contain'}}/></span>:<span style={{width:'72px',height:'72px',display:'grid',placeItems:'center',fontSize:'1.7rem',opacity:.35,flex:'0 0 72px'}}>—</span>}<strong>{h.title}</strong><small>{h.lines.map(line=><span key={line} style={{display:'block'}}>{line}</span>)}</small></div>)}</div></section>
       <section id="records" style={{scrollMarginTop:'2rem'}}><p className="eyebrow">CLUB RECORDS</p><h2>Record book</h2><div className="dataList">{records.map((r,i)=><div className="dataRow" key={r[0]}><span>{String(i+1).padStart(2,'0')}</span><strong>{r[0]}</strong><small>{r[1]}</small></div>)}</div></section>
       <p className="migrationNote">Honours and club records updated from published Dunfermline Athletic reference records. Historical database records remain subject to source verification as the archive expands.</p>
     </section>
