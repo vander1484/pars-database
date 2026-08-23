@@ -26,8 +26,12 @@ export default function Records(){
     <header className="archiveNav"><Link className="brand" href="/">PARS<span>DATABASE</span></Link><Link href="/">← Home</Link></header>
     <section className="archiveHero"><p className="eyebrow">THE NUMBERS THAT MATTER</p><h1>Records & Honours</h1><p>The landmark achievements, trophies and club records of Dunfermline Athletic.</p></section>
     <section className="archiveContent">
-      <section style={{marginBottom:'4rem'}}><p className="eyebrow">HONOURS</p><h2>Major & minor honours</h2><div className="dataList">{honours.map((h,i)=><div className="dataRow" key={h.title}><span>{String(i+1).padStart(2,'0')}</span><strong>{h.title}</strong><small>{h.lines.map(line=><span key={line} style={{display:'block'}}>{line}</span>)}</small></div>)}</div></section>
-      <section><p className="eyebrow">CLUB RECORDS</p><h2>Record book</h2><div className="dataList">{records.map((r,i)=><div className="dataRow" key={r[0]}><span>{String(i+1).padStart(2,'0')}</span><strong>{r[0]}</strong><small>{r[1]}</small></div>)}</div></section>
+      <nav aria-label="Records sections" style={{display:'flex',gap:'.75rem',marginBottom:'2.5rem',flexWrap:'wrap'}}>
+        <a href="#honours" className="dataRow" style={{display:'inline-flex',width:'auto',padding:'.8rem 1rem'}}>Honours</a>
+        <a href="#records" className="dataRow" style={{display:'inline-flex',width:'auto',padding:'.8rem 1rem'}}>Records</a>
+      </nav>
+      <section id="honours" style={{marginBottom:'4rem',scrollMarginTop:'2rem'}}><p className="eyebrow">HONOURS</p><h2>Major & minor honours</h2><div className="dataList">{honours.map((h,i)=><div className="dataRow" key={h.title}><span>{String(i+1).padStart(2,'0')}</span><strong>{h.title}</strong><small>{h.lines.map(line=><span key={line} style={{display:'block'}}>{line}</span>)}</small></div>)}</div></section>
+      <section id="records" style={{scrollMarginTop:'2rem'}}><p className="eyebrow">CLUB RECORDS</p><h2>Record book</h2><div className="dataList">{records.map((r,i)=><div className="dataRow" key={r[0]}><span>{String(i+1).padStart(2,'0')}</span><strong>{r[0]}</strong><small>{r[1]}</small></div>)}</div></section>
       <p className="migrationNote">Honours and club records updated from published Dunfermline Athletic reference records. Historical database records remain subject to source verification as the archive expands.</p>
     </section>
   </main>
