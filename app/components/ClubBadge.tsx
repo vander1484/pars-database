@@ -21,8 +21,8 @@ const aliases:Record<string,string>={
   "Girondins de Bordeaux":"Bordeaux",
   "B 1903 Copenhagen":"Boldklubben 1903",
   "Gwardia Warsaw":"Gwardia Warszawa",
-  "Frigg":"Frigg Oslo FK",
-  "Vardar":"FK Vardar"
+  "Frigg":"Frigg",
+  "Vardar":"Vardar"
 };
 
 const sportsDbIds:Record<string,string>={
@@ -32,20 +32,20 @@ const sportsDbIds:Record<string,string>={
   "Újpesti Dózsa":"138183",
   "Örgryte IS":"135668",
   "Athletic Bilbao":"133727",
-  "Spartak Brno":"140094"
+  "Spartak Brno":"140094",
+  "Vardar":"133979",
+  "Frigg":"140043"
 };
 
 const directBadgeUrls:Record<string,string>={
-  "Vardar":"https://footballia.net/uploads/team/logo/776/800px-FK_Vardar_logo.svg.png",
   "Gwardia Warsaw":"https://cdn.laczynaspilka.pl/cms2/prod/sites/default/files/2021-03/herb_gwardia_warszawa.png",
-  "Frigg":"https://web.frigg.no/wp-content/uploads/2025/01/Frigg_logo_stor-1331x1536.png",
   "B 1903 Copenhagen":"https://cdn-img.zerozero.pt/img/logos/equipas/3795_imgbank_1697701988.png"
 };
 
-const CACHE_VERSION='v5';
+const CACHE_VERSION='v6';
 function keyFor(name:string){return `pars-badge-${CACHE_VERSION}:${name.toLowerCase()}`}
 let queue:Promise<unknown>=Promise.resolve();
-function scheduled<T>(fn:()=>Promise<T>):Promise<T>{const run=queue.then(()=>new Promise<void>(r=>setTimeout(r,180))).then(fn);queue=run.catch(()=>undefined);return run}
+function scheduled<T>(fn:()=>Promise<T>):Promise<T>{const run=queue.then(()=>new Promise<void>(r=>setTimeout(r,120))).then(fn);queue=run.catch(()=>undefined);return run}
 function norm(s:string){return s.toLowerCase().replace(/\b(fc|footballclub|football|club)\b/g,'').replace(/[^a-z0-9]/g,'')}
 async function lookup(name:string){
   const cached=memory.get(name);if(cached)return cached;
@@ -71,8 +71,8 @@ async function lookup(name:string){
 }
 
 export default function ClubBadge({name,size="sm"}:{name:string;size?:"sm"|"md"|"lg"}){
-  const [src,setSrc]=useState<string|null>(()=>memory.get(name)||directBadgeUrls[name]||null),[loading,setLoading]=useState(!memory.has(name)&&!directBadgeUrls[name]);const host=useRef<HTMLSpanElement>(null);
-  useEffect(()=>{let alive=true,observer:IntersectionObserver|undefined;const load=()=>{setLoading(true);lookup(name).then(v=>{if(alive){setSrc(v);setLoading(false)}})};if(typeof IntersectionObserver==='undefined')load();else{observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer?.disconnect();load()}},{rootMargin:'220px'});if(host.current)observer.observe(host.current)}return()=>{alive=false;observer?.disconnect()}},[name]);
   const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
-  return <span ref={host} className={`clubBadge clubBadge-${size}`} title={name}>{src?<img src={src} alt={`${name} badge`} loading="lazy" referrerPolicy="no-referrer" onError={()=>{setSrc(null);setLoading(false)}}/>:<span className={loading?"clubBadgeLoading":"clubBadgeFallback"}>{loading?'':initials}</span>}</span>
+  const [src,setSrc]=useState<string|null>(()=>memory.get(name)||directBadgeUrls[name]||null);const host=useRef<HTMLSpanElement>(null);
+  useEffect(()=>{let alive=true,observer:IntersectionObserver|undefined;const load=()=>{lookup(name).then(v=>{if(alive&&v)setSrc(v)})};if(typeof IntersectionObserver==='undefined')load();else{observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer?.disconnect();load()}},{rootMargin:'300px'});if(host.current)observer.observe(host.current)}return()=>{alive=false;observer?.disconnect()}},[name]);
+  return <span ref={host} className={`clubBadge clubBadge-${size}`} title={name}>{src?<img src={src} alt={`${name} badge`} loading="lazy" referrerPolicy="no-referrer" onError={()=>setSrc(null)}/>:<span className="clubBadgeFallback">{initials}</span>}</span>
 }
