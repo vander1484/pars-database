@@ -4,7 +4,7 @@ const comps=[
   {title:'League',text:'Scottish league history and tables',href:'/seasons/'},
   {title:'Scottish Cup',text:'Every Scottish Cup campaign',href:'/matches/?competition=Scottish%20Cup'},
   {title:'League Cup',text:'League Cup results and campaigns',href:'/matches/?competition=League%20Cup'},
-  {title:'Europe',text:'The Pars in European competition',href:'/matches/?competition=Europe'},
+  {title:'Europe',text:'The Pars in European competition',href:'/europe/'},
   {title:'Challenge Cup',text:'Challenge Cup history',href:'/matches/?competition=Scottish%20Challenge%20Cup'},
   {title:'Other',text:'Friendlies and other competitions',href:'/matches/?competition=Other'}
 ];
