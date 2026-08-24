@@ -1,113 +1,39 @@
 /* Europe map: geographic base + live route/marker overlays */
 .euroV4 .mapFeature{margin-top:1rem}
 .euroV4 .realMap{
-  min-height:620px;
-  aspect-ratio:1.82/1;
+  height:clamp(470px,43vw,585px);
+  min-height:0!important;
+  aspect-ratio:auto!important;
   border:0;
   border-radius:2px;
   overflow:hidden;
   position:relative;
   isolation:isolate;
-  background:
-    radial-gradient(circle at 52% 49%,rgba(218,31,43,.10),transparent 24%),
-    linear-gradient(180deg,#11161c 0%,#080c11 100%);
+  background:radial-gradient(circle at 52% 45%,rgba(218,31,43,.10),transparent 24%),linear-gradient(180deg,#11161c 0%,#080c11 100%);
   box-shadow:0 28px 70px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.055);
 }
-
-/*
- * The source Europe SVG is square and leaves too much unused space on a wide
- * match-map panel. Stretching the cartographic layer horizontally around
- * central Europe gives the map the same visual coordinate field used by the
- * interactive city markers without touching the marker data or interactions.
- */
 .euroV4 .realMap:before{
-  content:"";
-  position:absolute;
-  inset:2% 4% 2% 4%;
-  z-index:0;
-  pointer-events:none;
+  content:"";position:absolute;inset:-7% 3% -8% 3%;z-index:0;pointer-events:none;
   background-image:url("https://raw.githubusercontent.com/highcharts/map-collection-dist/master/custom/europe.svg");
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;
-  filter:grayscale(1) brightness(.49) contrast(1.32);
-  opacity:.70;
-  transform:scaleX(1.72) scaleY(1.03);
-  transform-origin:39% 50%;
+  background-repeat:no-repeat;background-position:center 44%;background-size:contain;
+  filter:grayscale(1) brightness(.49) contrast(1.32);opacity:.70;
+  transform:scaleX(1.72) scaleY(1.14);transform-origin:39% 45%;
 }
-.euroV4 .realMap:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 53% 49%,rgba(213,31,43,.08),transparent 23%),
-    linear-gradient(90deg,rgba(5,8,11,.58),transparent 13%,transparent 84%,rgba(5,8,11,.50));
-}
-
-/*
- * page.tsx currently uses viewBox 0 0 100 86 for the route SVG, while marker
- * positions use percentages on a 100 x 100 field. Correct that mismatch here:
- * 1.565 expands the letterboxed SVG to the panel width and .86 converts the
- * 86-unit Y axis to the marker percentage axis. Route ends now meet badges.
- */
-.euroV4 .europeShape{
-  inset:0;
-  width:100%;
-  height:100%;
-  opacity:1;
-  filter:none;
-  z-index:2;
-  pointer-events:none;
-  transform:scaleX(1.565) scaleY(.86);
-  transform-origin:50% 0;
-}
+.euroV4 .realMap:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 53% 45%,rgba(213,31,43,.08),transparent 23%),linear-gradient(90deg,rgba(5,8,11,.58),transparent 13%,transparent 84%,rgba(5,8,11,.50))}
+.euroV4 .europeShape{inset:0;width:100%;height:100%;opacity:1;filter:none;z-index:2;pointer-events:none;transform:scaleX(1.565) scaleY(.86);transform-origin:50% 0}
 .euroV4 .europeShape .land,.euroV4 .europeShape .countryLines{display:none!important}
-.euroV4 .routeLine{
-  stroke:#ef3340;
-  stroke-width:.34;
-  stroke-dasharray:1.45 1.05;
-  opacity:.9;
-  filter:drop-shadow(0 0 1.4px rgba(239,51,64,.72));
-  vector-effect:non-scaling-stroke;
-}
+.euroV4 .routeLine{stroke:#ef3340;stroke-width:.34;stroke-dasharray:1.45 1.05;opacity:.9;filter:drop-shadow(0 0 1.4px rgba(239,51,64,.72));vector-effect:non-scaling-stroke}
 .euroV4 .homePulse{fill:#fff;stroke:#ef3340;stroke-width:.42;filter:drop-shadow(0 0 3px #ef3340);vector-effect:non-scaling-stroke}
-
 .euroV4 .homeMarker,.euroV4 .destination,.euroV4 .semiFlag{z-index:5}
 .euroV4 .homeMarker{min-width:110px;background:rgba(7,10,13,.88);border:1px solid #34404a;padding:.45rem .58rem;box-shadow:0 10px 24px rgba(0,0,0,.36);backdrop-filter:blur(7px)}
 .euroV4 .homeMarker i{width:13px;height:13px;border-width:3px;box-shadow:0 0 0 6px rgba(239,51,64,.18),0 0 25px rgba(239,51,64,.42)}
-.euroV4 .homeMarker b{font-size:.78rem;text-shadow:0 2px 5px #000}
-.euroV4 .homeMarker span{font-size:.57rem;color:#9ca5af}
-.euroV4 .destination{gap:.7rem}
+.euroV4 .homeMarker b{font-size:.78rem;text-shadow:0 2px 5px #000}.euroV4 .homeMarker span{font-size:.57rem;color:#9ca5af}.euroV4 .destination{gap:.7rem}
 .euroV4 .crestPin{width:48px;height:48px;border:2px solid rgba(255,255,255,.82);box-shadow:0 0 0 5px rgba(255,255,255,.055),0 12px 24px rgba(0,0,0,.55);transition:transform .18s ease,box-shadow .18s ease}
 .euroV4 .destination:hover .crestPin{transform:scale(1.08);box-shadow:0 0 0 6px rgba(239,51,64,.16),0 14px 28px rgba(0,0,0,.6)}
-.euroV4 .crestPin .clubBadge-sm{width:35px;height:35px}
-.euroV4 .crestPin>i{width:19px;height:19px;right:-6px;top:-6px;background:#ef3340;font-size:.56rem}
+.euroV4 .crestPin .clubBadge-sm{width:35px;height:35px}.euroV4 .crestPin>i{width:19px;height:19px;right:-6px;top:-6px;background:#ef3340;font-size:.56rem}
 .euroV4 .destLabel{min-width:126px;background:rgba(8,12,16,.94);border:1px solid #3a4651;border-left:3px solid #ef3340;padding:.55rem .65rem;box-shadow:0 9px 20px rgba(0,0,0,.32);backdrop-filter:blur(10px)}
-.euroV4 .destLabel b{font-size:.76rem;letter-spacing:-.015em}
-.euroV4 .destLabel span{font-size:.58rem;color:#b6bec7;margin-top:.05rem}
-.euroV4 .destLabel small{font-size:.51rem;color:#f16c75;margin-top:.25rem}
-.euroV4 .semiFlag{right:3.5%;top:5%;font-size:3.5rem;line-height:.75;letter-spacing:-.045em;opacity:1;text-shadow:0 8px 24px #000}
-.euroV4 .semiFlag b{display:inline-block;margin-top:.8rem;font-size:.67rem;letter-spacing:.19em;color:#ef3340}
-
-.euroV4 .mapSeasonPicker{margin-top:1px;border:0;background:#2a2f35;grid-template-columns:repeat(9,minmax(100px,1fr))}
-.euroV4 .mapSeasonPicker button{background:#15191e;color:#9da4ac;min-height:78px;border-top:3px solid transparent;padding:.85rem .7rem;transition:.18s ease}
-.euroV4 .mapSeasonPicker button:hover{background:#1c2229;color:#fff}
-.euroV4 .mapSeasonPicker button.active{background:#a91d26;color:#fff;border-top-color:#ef3340}
-.euroV4 .mapSeasonPicker span{font-size:.9rem}
-.euroV4 .mapSeasonPicker small{font-size:.54rem;line-height:1.3}
-
-@media(max-width:1150px){
-  .euroV4 .realMap{min-height:570px}
-  .euroV4 .mapSeasonPicker{grid-template-columns:repeat(5,1fr)}
-}
-@media(max-width:760px){
-  .euroV4 .realMap{min-height:620px;aspect-ratio:.82/1}
-  .euroV4 .realMap:before{inset:7% -17% 7% -17%;background-size:cover;opacity:.60;transform:scaleX(1.25) scaleY(1.03);transform-origin:47% 50%}
-  .euroV4 .europeShape{transform:scaleX(1.565) scaleY(.86)}
-  .euroV4 .destination{transform:translate(-50%,-50%) scale(.88)}
-  .euroV4 .destLabel{display:none}
-  .euroV4 .semiFlag{font-size:2.4rem}
-  .euroV4 .mapSeasonPicker{grid-template-columns:repeat(3,1fr)}
-}
+.euroV4 .destLabel b{font-size:.76rem;letter-spacing:-.015em}.euroV4 .destLabel span{font-size:.58rem;color:#b6bec7;margin-top:.05rem}.euroV4 .destLabel small{font-size:.51rem;color:#f16c75;margin-top:.25rem}
+.euroV4 .semiFlag{right:3.5%;top:5%;font-size:3.5rem;line-height:.75;letter-spacing:-.045em;opacity:1;text-shadow:0 8px 24px #000}.euroV4 .semiFlag b{display:inline-block;margin-top:.8rem;font-size:.67rem;letter-spacing:.19em;color:#ef3340}
+.euroV4 .mapSeasonPicker{margin-top:1px;border:0;background:#2a2f35;grid-template-columns:repeat(9,minmax(100px,1fr))}.euroV4 .mapSeasonPicker button{background:#15191e;color:#9da4ac;min-height:78px;border-top:3px solid transparent;padding:.85rem .7rem;transition:.18s ease}.euroV4 .mapSeasonPicker button:hover{background:#1c2229;color:#fff}.euroV4 .mapSeasonPicker button.active{background:#a91d26;color:#fff;border-top-color:#ef3340}.euroV4 .mapSeasonPicker span{font-size:.9rem}.euroV4 .mapSeasonPicker small{font-size:.54rem;line-height:1.3}
+@media(max-width:1150px){.euroV4 .realMap{height:520px}.euroV4 .mapSeasonPicker{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:760px){.euroV4 .realMap{height:520px;min-height:0!important;aspect-ratio:auto!important}.euroV4 .realMap:before{inset:3% -17%;background-size:cover;opacity:.60;transform:scaleX(1.25) scaleY(1.03);transform-origin:47% 50%}.euroV4 .europeShape{transform:scaleX(1.565) scaleY(.86)}.euroV4 .destination{transform:translate(-50%,-50%) scale(.88)}.euroV4 .destLabel{display:none}.euroV4 .semiFlag{font-size:2.4rem}.euroV4 .mapSeasonPicker{grid-template-columns:repeat(3,1fr)}}
