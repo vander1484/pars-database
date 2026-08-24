@@ -69,7 +69,7 @@ export default function MapRuntimeFix(){
 
   const render=()=>{
     const w=map.clientWidth,h=map.clientHeight;if(!w||!h)return;
-    const size=TILE*Math.pow(2,ZOOM),center=world(CENTER);
+    const center=world(CENTER);
     const origin={x:center.x-w/2,y:center.y-h/2};
 
     tileLayer.innerHTML='';
@@ -79,7 +79,7 @@ export default function MapRuntimeFix(){
     for(let tx=minTx;tx<=maxTx;tx++)for(let ty=minTy;ty<=maxTy;ty++){
       if(ty<0||ty>=n)continue;
       const img=document.createElement('img');
-      img.src=`https://basemaps.cartocdn.com/dark_nolabels/${ZOOM}/${((tx%n)+n)%n}/${ty}.png`;
+      img.src=`https://a.basemaps.cartocdn.com/dark_nolabels/${ZOOM}/${((tx%n)+n)%n}/${ty}.png`;
       img.alt='';img.decoding='async';img.loading='eager';
       img.style.left=`${tx*TILE-origin.x}px`;img.style.top=`${ty*TILE-origin.y}px`;
       tileLayer.append(img);
