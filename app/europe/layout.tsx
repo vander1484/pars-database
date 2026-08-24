@@ -1,3 +1,4 @@
+import "flag-icons/css/flag-icons.min.css";
 import "./map-fix.css";
 import MapRuntimeFix from "./MapRuntimeFix";
 
