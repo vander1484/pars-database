@@ -4,7 +4,7 @@ import {FormEvent,useState} from "react";
 import {usePathname,useRouter} from "next/navigation";
 import ClubBadge from "./ClubBadge";
 
-const links=[['/players','Players'],['/matches','Matches'],['/seasons','Seasons'],['/managers','Managers'],['/competitions','Competitions'],['/records','Records'],['/interactive','Interactive']];
+const links=[['/players','Players'],['/matches','Matches'],['/seasons','Seasons'],['/managers','Managers'],['/competitions','Competitions'],['/records','Records'],['/greatest-50','Greatest 50'],['/interactive','Interactive']];
 export default function SiteHeader(){
   const path=usePathname();
   const router=useRouter();
