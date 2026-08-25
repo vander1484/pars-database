@@ -7,7 +7,7 @@ import ClubBadge from "./ClubBadge";
 const groups=[
  {label:'Archive',items:[['/players','Players'],['/matches','Matches'],['/seasons','Seasons'],['/competitions','Competitions']]},
  {label:'Club',items:[['/managers','Managers'],['/records','Honours & Records'],['/greatest-50','Greatest 50'],['/timeline','Timeline'],['/europe','European History']]},
- {label:'Interactive',items:[['/interactive','Games Hub'],['/interactive/pardle','Pardle'],['/interactive/career-path','Career Path'],['/interactive/higher-lower','Higher or Lower'],['/interactive/starting-xi','Starting XI']]}
+ {label:'Interactive',items:[['/interactive','Games Hub'],['/polls','Supporter Polls'],['/interactive/pardle','Pardle'],['/interactive/career-path','Career Path'],['/interactive/higher-lower','Higher or Lower'],['/interactive/starting-xi','Starting XI']]}
 ];
 
 export default function SiteHeader(){
