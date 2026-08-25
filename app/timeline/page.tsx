@@ -5,76 +5,103 @@ type Event={year:string,title:string,text:string,tag?:string,featured?:boolean};
 type Era={id:string,years:string,title:string,intro:string,events:Event[]};
 
 const eras:Era[]=[
-{id:'origins',years:'1885—1912',title:'The club takes shape',intro:'From a cricket club offshoot to an established senior football club at East End Park.',events:[
-{year:'1885',title:'Dunfermline Athletic is born',text:'Dunfermline Athletic Football Club is formed, emerging from the town’s cricket club.',tag:'Foundation',featured:true},
-{year:'1886',title:'East End Park',text:'The new club establishes its home at East End Park, the ground that remains home to the Pars.',tag:'East End Park'},
-{year:'1889',title:'The first Fife Cup',text:'Dunfermline win the Fife Cup, an early piece of silverware in the club’s formative years.',tag:'Honour'},
-{year:'1899',title:'Senior status',text:'The club enters a new era as the Scottish game develops into a national league structure.',tag:'Club'},
-{year:'1912',title:'Scottish League football',text:'Dunfermline Athletic enter the Scottish Football League and begin the league story recorded in the archive.',tag:'League',featured:true}
+{id:'origins',years:'1874—1912',title:'From cricket field to football club',intro:'The football story begins before Dunfermline Athletic itself, then quickly gathers a ground, trophies, professional status and a place in the Scottish League.',events:[
+{year:'1874',title:'Football begins in Dunfermline',text:'Dunfermline Cricket Club forms a football section and matches are played at the Town Green.',tag:'Origins',featured:true},
+{year:'1885',title:'Dunfermline Athletic is formed',text:'On 2 June, the football members break away from the cricket club and create Dunfermline Athletic Football Club.',tag:'Foundation',featured:true},
+{year:'1888',title:'First tournament success',text:'The new club wins the Fife Cup, then has a turbulent spell after suspension by the Fife Football Association.',tag:'Honour'},
+{year:'1889',title:'A dramatic Scottish Cup tie',text:'A 4–4 draw at East End Park is followed by the club’s heaviest defeat, 11–1 away to Hibernian in the replay.',tag:'Record'},
+{year:'1899',title:'Professional status',text:'Dunfermline Athletic formally turns professional on 24 July.',tag:'Club'},
+{year:'1903',title:'East End Park moves east',text:'Housebuilding and drainage issues force the ground to shift to the present East End Park location.',tag:'East End Park'},
+{year:'1905',title:'Into the Scottish Cup proper',text:'The Pars compete in the Scottish Cup proper for the first time.',tag:'Cup'},
+{year:'1910',title:'Central League champions',text:'Dunfermline lift the Central League Championship.',tag:'Champions'},
+{year:'1911',title:'Scottish Qualifying Cup winners',text:'Another early honour arrives as Dunfermline win the Scottish Qualifying Cup.',tag:'Honour'},
+{year:'1912',title:'Scottish League admission',text:'The club enters the Scottish League. Around this period, the nickname “The Pars” becomes established.',tag:'League',featured:true}
 ]},
-{id:'between',years:'1912—1958',title:'League football and the long climb',intro:'Promotion, war, huge crowds and the foundations of the side that would transform the club in the 1960s.',events:[
-{year:'1926',title:'Second Division champions',text:'Dunfermline win a first Scottish league championship and earn promotion to the top division.',tag:'Champions',featured:true},
-{year:'1934',title:'Back to the top flight',text:'Another strong Second Division campaign brings promotion and a return to Scotland’s leading level.',tag:'Promotion'},
-{year:'1949',title:'A first League Cup final',text:'The Pars reach the Scottish League Cup final for the first time, facing East Fife at Hampden.',tag:'Final',featured:true},
-{year:'1955',title:'Promotion again',text:'A runner-up finish takes Dunfermline back into the First Division and begins a sustained top-flight period.',tag:'Promotion'},
-{year:'1958',title:'The Stein era begins',text:'Jock Stein takes charge at East End Park, beginning one of the most important chapters in club history.',tag:'Manager',featured:true}
+{id:'established',years:'1919—1959',title:'League roots, records and promotion',intro:'Dunfermline becomes an established league club, appoints its first manager, produces internationals, draws huge crowds and repeatedly fights its way back to the top flight.',events:[
+{year:'1919',title:'Central League breakaway',text:'The club leaves the Scottish League and helps establish a highly successful Central League competition.',tag:'League'},
+{year:'1920',title:'First Scotland international',text:'Andy Wilson becomes the first Dunfermline player to win a full Scotland cap.',tag:'International',featured:true},
+{year:'1921',title:'Back into the Scottish League',text:'Dunfermline joins the new Second Division after the success of the breakaway Central League and becomes a public limited company.',tag:'League'},
+{year:'1922',title:'First manager appointed',text:'William Knight becomes Dunfermline Athletic’s first manager. The Supporters Association is also formed, the first of its kind in Scotland.',tag:'Club',featured:true},
+{year:'1926',title:'Second Division champions',text:'The Pars win the Second Division title while Bobby Skinner sets a club record with 53 league goals in the season.',tag:'Champions',featured:true},
+{year:'1930',title:'Record league win',text:'Dunfermline beat Stenhousemuir 11–2, setting the club’s record league victory.',tag:'Record'},
+{year:'1934',title:'Promotion to the First Division',text:'The club earns promotion to Scotland’s top division for the second time.',tag:'Promotion'},
+{year:'1939',title:'Football in wartime',text:'Restrictions on large gatherings affect East End Park before Dunfermline joins the north-eastern wartime league, aided by guest players including Billy Liddell.',tag:'War years'},
+{year:'1949',title:'First League Cup final',text:'Dunfermline reaches a first Scottish League Cup final, losing 3–0 to East Fife.',tag:'Final',featured:true},
+{year:'1955',title:'Promotion under Bobby Ancell',text:'The Pars return to the First Division, although relegation follows two years later.',tag:'Promotion'},
+{year:'1958',title:'Promotion with 120 league goals',text:'Dunfermline wins promotion after scoring a remarkable 120 league goals.',tag:'Record',featured:true},
+{year:'1959',title:'Floodlights at East End Park',text:'The club’s floodlights are switched on for the first time in a friendly against Sheffield United.',tag:'East End Park'}
 ]},
-{id:'golden',years:'1958—1972',title:'The golden age',intro:'Scottish Cups, European nights and a Dunfermline side that became one of the strongest clubs in the country.',events:[
-{year:'1961',title:'Scottish Cup winners',text:'Dunfermline defeat Celtic after a replay to win the Scottish Cup for the first time.',tag:'Scottish Cup',featured:true},
-{year:'1961',title:'Into Europe',text:'The Scottish Cup triumph takes the Pars into European competition and onto a new stage.',tag:'Europe'},
-{year:'1962',title:'European progress',text:'European football becomes part of the East End Park story as Dunfermline begin building a formidable continental reputation.',tag:'Europe'},
-{year:'1963',title:'A European quarter-final',text:'The Pars reach the last eight of the Cup Winners’ Cup, establishing themselves well beyond Scotland.',tag:'Europe',featured:true},
-{year:'1964',title:'Stein departs',text:'Jock Stein leaves Dunfermline after transforming the club’s standing at home and abroad.',tag:'Manager'},
-{year:'1965',title:'Scottish Cup finalists',text:'Dunfermline return to Hampden and finish runners-up in the Scottish Cup.',tag:'Final'},
-{year:'1966',title:'Fairs Cup quarter-finalists',text:'The Pars reach the quarter-finals of the Inter-Cities Fairs Cup during another memorable European run.',tag:'Europe',featured:true},
-{year:'1968',title:'Scottish Cup winners again',text:'George Farm’s side defeat Hearts 3–1 at Hampden to lift the Scottish Cup for a second time.',tag:'Scottish Cup',featured:true},
-{year:'1968',title:'27,816 at East End Park',text:'A record home crowd watches the Pars face Celtic at East End Park.',tag:'Record'},
-{year:'1969',title:'European semi-finalists',text:'Dunfermline reach the Cup Winners’ Cup semi-final, the club’s greatest European achievement.',tag:'Europe',featured:true},
-{year:'1969',title:'Third in Scotland',text:'The Pars finish third in the top flight, the club’s highest league placing.',tag:'League'},
-{year:'1972',title:'End of an era',text:'Relegation closes the extraordinary sustained top-flight chapter that defined the 1960s.',tag:'League'}
+{id:'golden',years:'1960—1973',title:'The golden age',intro:'Stein, Farm, Scottish Cups, record crowds, international recognition and repeated European adventures establish Dunfermline among Scotland’s elite.',events:[
+{year:'1960',title:'Jock Stein takes charge',text:'Jock Stein is appointed manager and wins six successive matches to steer the club clear of relegation.',tag:'Manager',featured:true},
+{year:'1961',title:'Scottish Cup winners',text:'Dunfermline defeats Celtic 2–0 in a replay to win the Scottish Cup for the first time.',tag:'Scottish Cup',featured:true},
+{year:'1961',title:'European debut',text:'The Pars enter European competition and beat St Patrick’s Athletic 8–1 on aggregate.',tag:'Europe'},
+{year:'1961',title:'Another Scotland breakthrough',text:'Cammy Fraser becomes the second Pars player to receive Scotland U23 recognition.',tag:'International'},
+{year:'1962',title:'New grandstand opens',text:'A new grandstand seating more than 3,000 is opened at East End Park.',tag:'East End Park'},
+{year:'1962',title:'Alex Edwards makes history',text:'At 16 years and 5 months, Alex Edwards becomes Dunfermline’s youngest first-team player.',tag:'Record'},
+{year:'1965',title:'One point from the title',text:'In one of the club’s finest seasons, Dunfermline misses the league title by a single point and reaches the Scottish Cup final.',tag:'League',featured:true},
+{year:'1966',title:'Scottish transfer record',text:'Alex Smith joins Rangers for £51,000, then a record fee between Scottish clubs.',tag:'Transfer'},
+{year:'1966',title:'Ferguson sets scoring mark',text:'Alex Ferguson scores 31 First Division goals in 1965/66, a new Dunfermline club record at the time.',tag:'Record'},
+{year:'1967',title:'Ferguson earns Scotland recognition',text:'Alex Ferguson features on Scotland’s unofficial tour of Australia and New Zealand before joining Rangers for another record Scottish transfer fee.',tag:'International'},
+{year:'1968',title:'Scottish Cup winners again',text:'Hearts are beaten 3–1 at Hampden as the Pars lift the Scottish Cup for the second time.',tag:'Scottish Cup',featured:true},
+{year:'1968',title:'Record East End Park crowd',text:'27,816 watch Dunfermline face Celtic in a league match, the ground’s record attendance.',tag:'Record'},
+{year:'1969',title:'European semi-finalists',text:'Dunfermline reaches the Cup Winners’ Cup semi-final before losing to eventual winners Slovan Bratislava.',tag:'Europe',featured:true},
+{year:'1971',title:'Financial crisis',text:'Losses of £58,338 force the club into drastic action to avoid bankruptcy.',tag:'Club'},
+{year:'1973',title:'Promotion with 95 goals',text:'The Pars win promotion from Division Two after scoring 95 goals, the highest total in Britain that season.',tag:'Promotion',featured:true},
+{year:'1973',title:'Remembering John Lunn',text:'John Lunn, one of the outstanding players of the 1960s era, dies from leukaemia.',tag:'Club'}
 ]},
-{id:'rebuild',years:'1972—1985',title:'Changing times',intro:'Relegations and restructuring bring a more difficult period, but the next great revival is taking shape.',events:[
-{year:'1973',title:'Promotion challenge',text:'The Pars finish runners-up in the second tier as the club seeks a route back to the top.',tag:'League'},
-{year:'1979',title:'Second Division runners-up',text:'Another promotion campaign brings a runners-up finish and movement back up the Scottish pyramid.',tag:'Promotion'},
-{year:'1983',title:'A difficult low point',text:'The club drops into the bottom tier, setting the stage for one of the great Dunfermline revivals.',tag:'League'},
-{year:'1983',title:'Jim Leishman takes charge',text:'Leishman begins a managerial era that reconnects the team, support and town.',tag:'Manager',featured:true}
+{id:'rebuild',years:'1979—1992',title:'Low point to Leishmania',intro:'After difficult years, the club bottoms out, Jim Leishman arrives and an extraordinary run of promotions takes Dunfermline back to the Premier Division.',events:[
+{year:'1979',title:'Promotion in front of a record crowd',text:'A 1–1 draw with Falkirk secures promotion to the First Division in front of a then-record Second Division crowd of 5,955.',tag:'Promotion'},
+{year:'1984',title:'Lowest league placing',text:'Dunfermline finishes ninth in the Second Division, the lowest league position in club history.',tag:'Record'},
+{year:'1986',title:'Second Division champions',text:'The Pars win the Second Division title, only the second major league championship in club history.',tag:'Champions',featured:true},
+{year:'1987',title:'Successive promotions',text:'Promotion is won in consecutive seasons, taking Dunfermline into the Premier Division for the first time.',tag:'Promotion',featured:true},
+{year:'1988',title:'Relegation and Youth Cup success',text:'The club is relegated but wins the Scottish BP Youth Cup.',tag:'Youth'},
+{year:'1989',title:'First Division champions',text:'Dunfermline wins the First Division title and returns to the Premier League.',tag:'Champions',featured:true},
+{year:'1989',title:'Remembering Gary Riddell',text:'Twenty-two-year-old centre-half Gary Riddell dies while running to raise money for victims of the Hillsborough disaster.',tag:'Club'},
+{year:'1989',title:'Top of the Premier League',text:'After reaching the League Cup semi-final, Dunfermline goes top of the Premier League for the first time in November.',tag:'League'},
+{year:'1990',title:'Leishman leaves',text:'Jim Leishman resigns after the longest single managerial spell in club history, prompting supporter demonstrations.',tag:'Manager',featured:true},
+{year:'1991',title:'League Cup finalists',text:'The Pars reach the League Cup final for only the second time, losing 2–0 to Hibernian.',tag:'Final'},
+{year:'1992',title:'Relegation with a scoring low',text:'Dunfermline drops into the First Division after scoring only 22 league goals, a club seasonal low.',tag:'Record'}
 ]},
-{id:'leishman',years:'1985—1992',title:'Leishmania',intro:'Two promotions in three seasons, packed terraces and the return of Dunfermline Athletic to Scotland’s top flight.',events:[
-{year:'1986',title:'Second Division champions',text:'The Pars win the title and promotion as Leishman’s revival gathers pace.',tag:'Champions',featured:true},
-{year:'1987',title:'Promotion at the first attempt',text:'Dunfermline finish runners-up and climb into the Premier Division, completing a remarkable rise.',tag:'Promotion',featured:true},
-{year:'1989',title:'First Division champions',text:'After relegation, the Pars respond immediately by winning the title and returning to the Premier Division.',tag:'Champions',featured:true},
-{year:'1991',title:'League Cup finalists',text:'Dunfermline reach another national final, meeting Hibernian in the Scottish League Cup.',tag:'Final'},
-{year:'1992',title:'A chapter closes',text:'The first Leishman managerial era ends after transforming the club’s fortunes and identity.',tag:'Manager'}
+{id:'premier',years:'1993—2007',title:'Promotion, tragedy and Premier ambition',intro:'Record-breaking campaigns, Norrie’s legacy, stadium redevelopment, European qualification and three national finals define a hugely eventful era.',events:[
+{year:'1993',title:'Reserve League winners',text:'Dunfermline wins the Scottish Reserve League East while the first team narrowly misses promotion.',tag:'Honour'},
+{year:'1994',title:'Record-breaking attack',text:'The Pars score 93 league goals and collect a then-record 65 points, yet miss promotion by one point.',tag:'Record',featured:true},
+{year:'1995',title:'First-ever Premier play-off',text:'Dunfermline faces Aberdeen in the inaugural play-off for a Premier League place, losing over two legs before almost 40,000 spectators.',tag:'Play-off'},
+{year:'1996',title:'First Division champions',text:'Bert Paton’s side wins the title and returns Dunfermline to the Premier Division.',tag:'Champions',featured:true},
+{year:'1997',title:'Fifth in the Premier Division',text:'A second consecutive League Cup semi-final accompanies the club’s highest league finish since reconstruction.',tag:'League'},
+{year:'1998',title:'A new Scottish top flight',text:'Dunfermline is one of ten clubs to resign from the Scottish League and form the new Scottish Premier League.',tag:'League'},
+{year:'1998',title:'East End Park redeveloped',text:'The all-seated stadium project delivers the new East Stand and the renamed Norrie McCathie Stand.',tag:'East End Park',featured:true},
+{year:'1999',title:'Relegated, then straight back',text:'The Pars go down but return to the Premier League at the first attempt under Jimmy Calderwood.',tag:'Promotion'},
+{year:'2000',title:'Main Stand refurbishment',text:'Plans are agreed for new bars, suites and corporate hospitality facilities in the Main Stand.',tag:'East End Park'},
+{year:'2001',title:'Scotland internationals again',text:'Barry Nicholson and Stevie Crawford become the first Dunfermline players in more than 30 years to play for the full Scotland side.',tag:'International',featured:true},
+{year:'2003',title:'Artificial pitch experiment',text:'Dunfermline becomes the first UK club authorised to use an artificial surface for first-team matches as part of a UEFA-backed trial.',tag:'Innovation',featured:true},
+{year:'2004',title:'Fourth in the SPL',text:'The Pars finish fourth with a club-record 53 Premier League points and return to the Scottish Cup final.',tag:'League',featured:true},
+{year:'2004',title:'Calderwood departs',text:'Immediately after the Scottish Cup final, Jimmy Calderwood leaves to become Aberdeen manager.',tag:'Manager'},
+{year:'2005',title:'Leishman’s great escape',text:'Jim Leishman returns as manager with three matches left and keeps Dunfermline in the SPL.',tag:'Manager',featured:true},
+{year:'2005',title:'Back to grass',text:'The SPL orders the club to replace the artificial surface with grass amid wider financial pressure.',tag:'East End Park'},
+{year:'2006',title:'Seventh major national final',text:'Dunfermline reaches the League Cup final but loses 3–0 to Celtic.',tag:'Final'},
+{year:'2006',title:'Stephen Kenny appointed',text:'Jim Leishman returns to his Director of Football role and Stephen Kenny becomes manager.',tag:'Manager'},
+{year:'2007',title:'Scottish Cup finalists again',text:'Despite relegation, Dunfermline reaches another Scottish Cup final and loses narrowly to Celtic.',tag:'Final',featured:true},
+{year:'2007',title:'Challenge Cup finalists',text:'The Pars also reach the Scottish Challenge Cup final, losing 3–2 to St Johnstone.',tag:'Final'},
+{year:'2007',title:'Jim McIntyre takes charge',text:'Stephen Kenny is dismissed in December and player-manager Jim McIntyre takes over.',tag:'Manager'}
 ]},
-{id:'premier',years:'1992—2007',title:'Paton, Calderwood and the Premier years',intro:'Promotion, tragedy, European qualification and a new generation that takes Dunfermline back to major finals.',events:[
-{year:'1996',title:'First Division champions',text:'Bert Paton’s side wins the title and promotion to the Premier Division.',tag:'Champions',featured:true},
-{year:'1996',title:'Remembering Norrie',text:'Club captain Norrie McCathie dies suddenly aged 34. His legacy remains central to Dunfermline Athletic.',tag:'Club',featured:true},
-{year:'2000',title:'Back in the top flight',text:'Jimmy Calderwood leads the Pars to promotion and begins an ambitious Premier League period.',tag:'Promotion'},
-{year:'2003',title:'European qualification',text:'A strong Premier League campaign earns the Pars a return to European competition.',tag:'Europe'},
-{year:'2004',title:'Scottish Cup finalists',text:'Dunfermline face Celtic at Hampden after a memorable cup run and finish runners-up.',tag:'Final',featured:true},
-{year:'2004',title:'Europe returns',text:'The UEFA Cup brings continental football back to East End Park after a long absence.',tag:'Europe'},
-{year:'2006',title:'League Cup finalists',text:'The Pars reach Hampden again, facing Celtic in the Scottish League Cup final.',tag:'Final'},
-{year:'2007',title:'Another Scottish Cup final',text:'Despite a difficult league season, Dunfermline reach the Scottish Cup final against Celtic.',tag:'Final',featured:true},
-{year:'2007',title:'European football again',text:'The cup run earns another UEFA Cup campaign, including the tie with BK Häcken.',tag:'Europe'}
-]},
-{id:'modern',years:'2007—2026',title:'Highs, lows and recovery',intro:'Championships, administration, supporter ownership and repeated rebuilds define the modern Pars story.',events:[
-{year:'2008',title:'Challenge Cup finalists',text:'Dunfermline reach the Scottish Challenge Cup final, finishing runners-up to St Johnstone.',tag:'Final'},
-{year:'2011',title:'First Division champions',text:'Jim McIntyre’s Pars win the league and return to the Scottish Premier League.',tag:'Champions',featured:true},
-{year:'2013',title:'Administration',text:'A financial crisis pushes the club into administration and threatens its future.',tag:'Club',featured:true},
-{year:'2013',title:'Supporters secure the future',text:'Pars United completes the takeover of the club, beginning a supporter-led recovery.',tag:'Club',featured:true},
-{year:'2014',title:'League One runners-up',text:'The rebuilding Pars finish second in League One.',tag:'League'},
-{year:'2016',title:'League One champions',text:'Allan Johnston’s side wins the title in emphatic fashion and returns to the Championship.',tag:'Champions',featured:true},
-{year:'2022',title:'Relegation to League One',text:'The Pars drop into the third tier after defeat in the Championship play-offs.',tag:'League'},
-{year:'2023',title:'League One champions',text:'James McPake’s side wins the title, losing only once during the league campaign.',tag:'Champions',featured:true},
-{year:'2025',title:'A new chapter',text:'The club enters another period of transition as the modern Dunfermline story continues.',tag:'Club'},
-{year:'2026',title:'Scottish Cup finalists',text:'The Pars reach another Scottish Cup final, adding a new Hampden chapter to the club timeline.',tag:'Final',featured:true}
+{id:'modern',years:'2011—2026',title:'Administration, recovery and another Hampden chapter',intro:'The modern story includes another league title, financial collapse, supporter-led recovery, promotion and a return to the Scottish Cup final.',events:[
+{year:'2011',title:'First Division champions',text:'Dunfermline wins the First Division Championship and returns to the SPL after three seasons away.',tag:'Champions',featured:true},
+{year:'2013',title:'Administration',text:'The club enters interim administration in March and the process is formally confirmed in April.',tag:'Club',featured:true},
+{year:'2013',title:'Youth Cup finalists',text:'Dunfermline U20s reach the Scottish Youth Cup final at Hampden, losing to Celtic.',tag:'Youth'},
+{year:'2013',title:'Relegated via the play-offs',text:'The Pars lose the play-off final to Alloa Athletic and drop out of the First Division.',tag:'League'},
+{year:'2014',title:'Another play-off final',text:'Dunfermline loses to Cowdenbeath and remains in the third tier for another season.',tag:'Play-off'},
+{year:'2015',title:'Managerial change',text:'John Potter and Neil McCann take charge after Jim Jefferies leaves, before Allan Johnston is appointed for 2015/16.',tag:'Manager'},
+{year:'2016',title:'League One champions',text:'The title is secured with five matches still to play, returning the Pars to Scotland’s second tier.',tag:'Champions',featured:true},
+{year:'2022',title:'Relegation to League One',text:'Dunfermline drops into the third tier following defeat in the Championship play-offs.',tag:'League'},
+{year:'2023',title:'League One champions again',text:'James McPake’s side wins the title after losing only once during the league campaign.',tag:'Champions',featured:true},
+{year:'2026',title:'Scottish Cup finalists',text:'The Pars return to Hampden for another Scottish Cup final, adding a new chapter to the club’s national-final history.',tag:'Final',featured:true}
 ]}
 ];
 
 export default function Timeline(){const count=eras.reduce((n,e)=>n+e.events.length,0);return <main className="timelinePage">
-<section className="timelineHero"><div className="timelineHeroInner"><p className="timelineEyebrow">DUNFERMLINE ATHLETIC · THE STORY</p><h1>140 years.<br/><em>One timeline.</em></h1><p>From a cricket club meeting in 1885 to Hampden, Europe, promotions, relegations and revival. Scroll through the moments that made Dunfermline Athletic.</p><div className="timelineHeroStats"><div><strong>1885</strong><span>Founded</span></div><div><strong>{count}</strong><span>Milestones</span></div><div><strong>2</strong><span>Scottish Cups</span></div><div><strong>140+</strong><span>Years of history</span></div></div></div></section>
+<section className="timelineHero"><div className="timelineHeroInner"><p className="timelineEyebrow">DUNFERMLINE ATHLETIC · THE STORY</p><h1>152 years.<br/><em>One timeline.</em></h1><p>From the first football section in 1874 to Scottish Cups, European nights, record crowds, promotions, relegations and recovery. Every Heritage Trust milestone is brought into one visual story.</p><div className="timelineHeroStats"><div><strong>1874</strong><span>The story begins</span></div><div><strong>{count}</strong><span>Milestones</span></div><div><strong>2</strong><span>Scottish Cups</span></div><div><strong>2026</strong><span>Latest chapter</span></div></div></div></section>
 <nav className="eraNav">{eras.map(e=><a key={e.id} href={`#${e.id}`}>{e.years}</a>)}</nav>
-<div className="timelineWrap">{eras.map((era,ei)=><section className="eraBlock" id={era.id} key={era.id}><div className="eraIntro"><div className="eraYears">{era.years}</div><div className="eraCopy"><small>ERA {String(ei+1).padStart(2,'0')}</small><h2>{era.title}</h2><p>{era.intro}</p></div></div><div className="timelineRail">{era.events.map((event,i)=><article className={`timelineEvent ${event.featured?'featured':''}`} key={`${event.year}-${event.title}`}><span className="timelineDot"/><div className="timelineCard"><div className="timelineYear">{event.year}</div><h3>{event.title}</h3><p>{event.text}</p>{event.tag&&<span className="timelineTag">{event.tag}</span>}</div></article>)}</div>{era.id==='golden'&&<div className="timelineBreak"><div className="timelineBreakNumber">60s</div><div className="timelineBreakCopy"><small>THE GOLDEN DECADE</small><h3>When East End Park looked out at Europe.</h3><p>Two Scottish Cups, a third-place league finish and repeated European adventures turned Dunfermline into one of the defining Scottish sides of the decade.</p></div></div>}</section>)}</div>
-<section className="timelineSource"><p>Historical timeline developed from the Dunfermline Athletic Heritage Trust chronology and expanded with links to the Pars Database archive.</p><a href="https://daht.org.uk/story.php?t=Dunfermline_Athletic_Timeline&ID=2490" target="_blank" rel="noreferrer">Heritage Trust source ↗</a></section>
+<div className="timelineWrap">{eras.map((era,ei)=><section className="eraBlock" id={era.id} key={era.id}><div className="eraIntro"><div className="eraYears">{era.years}</div><div className="eraCopy"><small>ERA {String(ei+1).padStart(2,'0')}</small><h2>{era.title}</h2><p>{era.intro}</p></div></div><div className="timelineRail">{era.events.map((event,i)=><article className={`timelineEvent ${event.featured?'featured':''}`} key={`${event.year}-${event.title}`}><span className="timelineDot"/><div className="timelineCard"><div className="timelineYear">{event.year}</div><h3>{event.title}</h3><p>{event.text}</p>{event.tag&&<span className="timelineTag">{event.tag}</span>}</div></article>)}</div>{era.id==='golden'&&<div className="timelineBreak"><div className="timelineBreakNumber">60s</div><div className="timelineBreakCopy"><small>THE GOLDEN DECADE</small><h3>When East End Park looked out at Europe.</h3><p>Two Scottish Cups, title challenges, record crowds and repeated European adventures turned Dunfermline into one of the defining Scottish clubs of the decade.</p></div></div>}</section>)}</div>
+<section className="timelineSource"><p>Historical chronology based on the Dunfermline Athletic Heritage Trust timeline, with the modern story extended through the current Pars Database archive.</p><a href="https://daht.org.uk/story.php?t=Dunfermline_Athletic_Timeline&ID=2490" target="_blank" rel="noreferrer">Heritage Trust source ↗</a></section>
 <section className="timelineOutro"><p>THE STORY DOESN’T STOP HERE</p><h2>Explore every<br/><em>season.</em></h2><Link href="/seasons/">Open the season archive →</Link></section>
 </main>}
