@@ -33,6 +33,18 @@ const locations:Record<string,Geo>={
   "BK Häcken":{lon:11.97,lat:57.71}
 };
 
+const campaigns:Record<string,string[]>={
+  "61/62":["St Patrick's Athletic","Vardar","Újpesti Dózsa"],
+  "62/63":["Everton","Valencia"],
+  "64/65":["Örgryte IS","VfB Stuttgart","Athletic Bilbao"],
+  "65/66":["B 1903 Copenhagen","Spartak Brno","Real Zaragoza"],
+  "66/67":["Frigg","Dinamo Zagreb"],
+  "68/69":["APOEL","Olympiacos","West Bromwich Albion","Slovan Bratislava"],
+  "69/70":["Girondins de Bordeaux","Gwardia Warsaw","Anderlecht"],
+  "04/05":["FH Hafnarfjordur"],
+  "07/08":["BK Häcken"]
+};
+
 const countryCodes:Record<string,string>={
   Ireland:"ie","North Macedonia":"mk",Hungary:"hu",England:"gb-eng",Spain:"es",Sweden:"se",Germany:"de",Denmark:"dk",
   Czechia:"cz",Norway:"no",Croatia:"hr",Cyprus:"cy",Greece:"gr",Scotland:"gb-sct",Slovakia:"sk",France:"fr",Poland:"pl",Belgium:"be",Iceland:"is"
@@ -76,7 +88,7 @@ export default function MapRuntimeFix(){
     const next=root.querySelector<HTMLElement>('.realMap');
     if(!next)return false;
     if(map!==next){
-      if(resizeObserver)resizeObserver.disconnect();
+      resizeObserver?.disconnect();
       map=next;
       resizeObserver=new ResizeObserver(()=>requestAnimationFrame(render));
       resizeObserver.observe(map);
@@ -102,9 +114,7 @@ export default function MapRuntimeFix(){
     svg.setAttribute('preserveAspectRatio','none');
 
     const europeBounds={type:'MultiPoint',coordinates:[[-25,34],[-25,66],[38,34],[38,66]]};
-    projection
-      .fitExtent([[42,28],[w-42,h-28]],europeBounds as any)
-      .clipExtent([[0,0],[w,h]]);
+    projection.fitExtent([[42,28],[w-42,h-28]],europeBounds as any).clipExtent([[0,0],[w,h]]);
 
     const path=geoPath(projection);
     svg.innerHTML='';
@@ -121,6 +131,9 @@ export default function MapRuntimeFix(){
       countriesG.append(p);
     }
 
+    const activeSeason=root.querySelector('.mapSeasonPicker button.active span')?.textContent?.trim()||'';
+    const allowed=new Set(campaigns[activeSeason]||[]);
+
     const hp=projection([locations['Dunfermline Athletic'].lon,locations['Dunfermline Athletic'].lat]) as Pt|null;
     const home=map.querySelector<HTMLElement>('.homeMarker');
     if(home&&hp){home.style.left=`${hp[0]}px`;home.style.top=`${hp[1]}px`}
@@ -132,15 +145,30 @@ export default function MapRuntimeFix(){
     const destinations=[...map.querySelectorAll<HTMLElement>('.destination')];
     destinations.forEach(el=>{
       const name=labelName(el);
+      if(!allowed.has(name)){
+        el.style.display='none';
+        el.setAttribute('aria-hidden','true');
+        return;
+      }
+
       const loc=locations[name];
-      if(!loc)return;
+      if(!loc){
+        el.style.display='none';
+        el.setAttribute('aria-hidden','true');
+        return;
+      }
+
       const p=projection([loc.lon,loc.lat]) as Pt|null;
       if(!p)return;
+      el.style.display='flex';
+      el.removeAttribute('aria-hidden');
       el.style.left=`${p[0]}px`;
       el.style.top=`${p[1]}px`;
+
       const label=el.querySelector<HTMLElement>('.destLabel');
       const offset=labelOffsets[name]||[8,0];
       if(label)label.style.transform=`translate(${offset[0]}px,${offset[1]}px)`;
+
       if(hp){
         const route=document.createElementNS('http://www.w3.org/2000/svg','path');
         const mx=(hp[0]+p[0])/2;
@@ -173,6 +201,7 @@ export default function MapRuntimeFix(){
     if((e.target as Element|null)?.closest('.mapSeasonPicker button')){
       requestAnimationFrame(()=>requestAnimationFrame(render));
       setTimeout(render,80);
+      setTimeout(render,180);
     }
   };
   root.addEventListener('click',click);
