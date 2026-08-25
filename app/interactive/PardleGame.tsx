@@ -2,7 +2,7 @@
 import Link from "next/link";
 import {FormEvent,useEffect,useMemo,useState} from "react";
 type Player={id:number;slug:string;name:string;position:string|null;photo_url:string|null;appearances:number;goals:number;firstYear?:number;lastYear?:number;seasons?:number};
-const U="https://uwhewuwnrcvrnclfzoge.supabase.co",K="sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT",H={apikey:K,Authorization:`Bearer ${K}`},ABC="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),MAX=6;
+const U="https://uwhewuwnrcvrnclfzoge.supabase.co",K="sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT",H={apikey:K,Authorization:`Bearer ${K}`},ABC="QWERTYUIOPASDFGHJKLZXCVBNM".split(''),MAX=6;
 function displayName(n:string){const p=n.split(',').map(x=>x.trim());return p.length===2?`${p[1]} ${p[0]}`:n.trim()}
 function norm(n:string){return displayName(n).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase()}
 function letters(n:string){return norm(n).replace(/[^A-Z]/g,'')}
