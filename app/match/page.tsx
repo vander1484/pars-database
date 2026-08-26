@@ -1,9 +1,213 @@
 "use client";
+
 import Link from "next/link";
-import {Suspense,useEffect,useState} from "react";
-import {useSearchParams} from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import ClubBadge from "../components/ClubBadge";
-type Player={number?:number;name:string;position?:string;captain?:boolean};type Lineup={club_id:number;formation:string|null;manager_name:string|null;starting_xi:Player[];substitutes:Player[]};type Match={id:number;played_on:string|null;season_id:number;round:string|null;home_club_id:number;away_club_id:number;home_score:number|null;away_score:number|null;attendance:number|null;venue:string|null;notes:string|null;home:{name:string}|null;away:{name:string}|null;competition_season:{display_name?:string|null;competition:{name:string}|null}|null;season:{label:string;slug:string}|null};
-const U="https://uwhewuwnrcvrnclfzoge.supabase.co",K="sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT",H={apikey:K,Authorization:`Bearer ${K}`};function date(v:string|null){if(!v)return"Date not recorded";return new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date(v+"T12:00:00"))}function PlayerRow({p}:{p:Player}){return <div className="playerRow"><b>{p.number||""}</b><span>{p.name}{p.captain?" (c)":""}</span><small>{p.position||""}</small></div>}
-function MatchRecord(){const id=useSearchParams().get("id"),[m,setM]=useState<Match|null>(null),[lineups,setLineups]=useState<Lineup[]>([]),[nearby,setNearby]=useState<Match[]>([]),[loading,setLoading]=useState(true);useEffect(()=>{if(!id){setLoading(false);return}const select="id,played_on,season_id,round,home_club_id,away_club_id,home_score,away_score,attendance,venue,notes,home:clubs!matches_home_club_id_fkey(name),away:clubs!matches_away_club_id_fkey(name),competition_season:competition_seasons(display_name,competition:competitions(name)),season:seasons(label,slug)";fetch(`${U}/rest/v1/matches?id=eq.${id}&select=${select}`,{headers:H}).then(r=>r.json()).then(async a=>{const match=a[0]||null;setM(match);if(!match)return;const [ls,ns]=await Promise.all([fetch(`${U}/rest/v1/match_lineups?match_id=eq.${id}&select=club_id,formation,manager_name,starting_xi,substitutes`,{headers:H}).then(r=>r.ok?r.json():[]),fetch(`${U}/rest/v1/matches?season_id=eq.${match.season_id}&select=${select}&order=played_on.asc`,{headers:H}).then(r=>r.json())]);setLineups(ls);setNearby(ns)}).finally(()=>setLoading(false))},[id]);if(loading)return <section className="matchLoading">Loading match centre…</section>;if(!m)return <section className="archiveContent emptyState"><strong>Match not found.</strong><span>The record may not have been backfilled yet.</span><Link href="/matches/">Browse all matches →</Link></section>;const home=m.home?.name||"Unknown",away=m.away?.name||"Unknown",comp=m.competition_season?.display_name||m.competition_season?.competition?.name||"Match",homeXI=lineups.find(x=>x.club_id===m.home_club_id),awayXI=lineups.find(x=>x.club_id===m.away_club_id),idx=nearby.findIndex(x=>x.id===m.id),prev=idx>0?nearby[idx-1]:null,next=idx>=0&&idx<nearby.length-1?nearby[idx+1]:null;return <><section className="mcHero"><div className="mcInner"><div className="meta">{comp.toUpperCase()} · {date(m.played_on).toUpperCase()}</div><div className="scoreStage"><div className="team"><ClubBadge name={home} size="lg"/><h1>{home}</h1></div><div className="score"><span>FULL TIME</span><div><strong>{m.home_score??"–"}</strong><i>:</i><strong>{m.away_score??"–"}</strong></div></div><div className="team"><ClubBadge name={away} size="lg"/><h1>{away}</h1></div></div><div className="facts"><div><span>VENUE</span><b>{m.venue||"Not recorded"}</b></div><div><span>ATTENDANCE</span><b>{m.attendance?.toLocaleString("en-GB")||"Not recorded"}</b></div><div><span>SEASON</span><b>{m.season?.label||"Not recorded"}</b></div><div><span>LINE-UPS</span><b>{lineups.length?"Available":"Being backfilled"}</b></div></div></div></section><nav className="tabs"><a href="#overview">Overview</a><a href="#lineups">Line-ups</a><a href="#context">Explore</a></nav><main className="centre"><section id="overview" className="section"><p className="kicker">01 · MATCH OVERVIEW</p><h2>The result</h2><div className="overview"><ClubBadge name={home} size="md"/><strong>{m.home_score??"–"}</strong><span>FT</span><strong>{m.away_score??"–"}</strong><ClubBadge name={away} size="md"/></div>{m.notes&&<p className="note">{m.notes}</p>}</section><section id="lineups" className="section dark"><p className="kicker">02 · LINE-UPS</p><h2>The teams</h2>{lineups.length?<div className="lineupGrid">{[homeXI,awayXI].map((lu,i)=>lu?<article className="sheet" key={lu.club_id}><header><ClubBadge name={i?away:home} size="md"/><div><h3>{i?away:home}</h3><p>{lu.formation||"Formation not recorded"} · Manager: {lu.manager_name||"Not recorded"}</p></div></header><h4>STARTING XI</h4><div>{lu.starting_xi.map((p,j)=><PlayerRow p={p} key={j}/>)}</div><h4>SUBSTITUTES</h4><div className="subs">{lu.substitutes.map((p,j)=><span key={j}>{p.name}</span>)}</div></article>:<article className="sheet empty" key={i}><ClubBadge name={i?away:home} size="md"/><h3>{i?away:home}</h3><p>Line-up not yet backfilled.</p></article>)}</div>:<div className="noData"><strong>Line-ups are still being backfilled</strong><p>The match record is valid. Team-sheet detail will appear here when it is added to the archive.</p></div>}</section><section id="context" className="section"><p className="kicker">03 · KEEP EXPLORING</p><h2>Don't stop here.</h2><div className="actions">{prev&&<Link href={`/match/?id=${prev.id}`}>← Previous match</Link>}{m.season?.slug&&<Link href={`/season/?slug=${m.season.slug}`}>Explore {m.season.label} →</Link>}<Link href={`/matches/?opponent=${encodeURIComponent(home.toLowerCase().includes('dunfermline')?away:home)}`}>More vs {home.toLowerCase().includes('dunfermline')?away:home} →</Link>}{next&&<Link href={`/match/?id=${next.id}`}>Next match →</Link>}</div></section></main></>}
-export default function MatchDetail(){return <main className="archivePage"><Suspense fallback={<section className="matchLoading">Loading match centre…</section>}><MatchRecord/></Suspense><style jsx global>{`.mcHero{background:#090a0c;color:#fff;padding:3rem 6vw 0}.mcInner{max-width:1380px;margin:auto}.meta{text-align:center;color:#8b8e94;font-size:.62rem;font-weight:900;letter-spacing:.12em}.scoreStage{display:grid;grid-template-columns:1fr .8fr 1fr;align-items:center;gap:3rem;padding:4rem 0}.team{text-align:center}.team h1{font-size:clamp(1.8rem,3vw,3.3rem);line-height:.95}.score{text-align:center}.score>span{border:1px solid #3b3e44;padding:.4rem .7rem;font-size:.55rem}.score>div{display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:1rem}.score strong{font-size:clamp(5rem,9vw,9rem);line-height:.8}.score i{font-style:normal;color:#d51f2b;font-size:2rem}.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #2d3035}.facts div{text-align:center;padding:1.2rem;border-right:1px solid #2d3035}.facts span{display:block;color:#777;font-size:.5rem;letter-spacing:.12em}.tabs{position:sticky;top:76px;z-index:20;background:#fff;display:flex;justify-content:center;border-bottom:1px solid #ccc}.tabs a{padding:1rem 1.5rem;font-size:.62rem;font-weight:900;text-transform:uppercase}.centre{background:#f2efe7}.section{padding:5rem 6vw;max-width:1400px;margin:auto;scroll-margin-top:130px}.section h2{font-size:clamp(3rem,6vw,6rem);line-height:.9;margin:.5rem 0 2rem}.kicker{font-size:.6rem;color:#d51f2b;font-weight:900;letter-spacing:.14em}.overview{background:#fff;border:1px solid #ccc7bd;padding:2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem}.overview strong{font-size:4rem}.overview span{background:#111;color:#fff;padding:.3rem .5rem;font-size:.55rem}.note{background:#e6e0d5;border-left:4px solid #d51f2b;padding:1rem}.dark{max-width:none;background:#0d0e10;color:#fff}.dark>*{max-width:1220px;margin-left:auto;margin-right:auto}.lineupGrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333}.sheet{background:#17191c;padding:2rem}.sheet header{display:flex;align-items:center;gap:1rem;border-bottom:1px solid #34363a;padding-bottom:1.2rem}.sheet h4{font-size:.55rem;color:#d51f2b;letter-spacing:.12em;margin:1.5rem 0 .6rem}.playerRow{display:grid;grid-template-columns:36px 1fr auto;padding:.58rem 0;border-bottom:1px solid #292b2f}.subs{display:flex;flex-wrap:wrap;gap:.45rem}.subs span{background:#24262a;padding:.45rem .6rem;font-size:.68rem}.noData{background:#17191c;padding:4rem;text-align:center;color:#888}.actions{display:flex;gap:.6rem;flex-wrap:wrap}.actions a,.emptyState a{background:#111;color:#fff;padding:.9rem 1rem;font-size:.65rem;font-weight:900;text-transform:uppercase}.matchLoading{padding:8rem;text-align:center;background:#0b0c0e;color:#888;min-height:60vh}@media(max-width:800px){.scoreStage{grid-template-columns:1fr 1fr}.score{grid-column:1/-1;grid-row:1}.facts,.lineupGrid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.facts,.lineupGrid{grid-template-columns:1fr}.section{padding:4rem 5vw}.tabs{justify-content:flex-start;overflow:auto}}`}</style></main>}
+
+type Player = {
+  number?: number;
+  name: string;
+  position?: string;
+  captain?: boolean;
+};
+
+type Lineup = {
+  club_id: number;
+  formation: string | null;
+  manager_name: string | null;
+  starting_xi: Player[];
+  substitutes: Player[];
+};
+
+type Match = {
+  id: number;
+  played_on: string | null;
+  season_id: number;
+  round: string | null;
+  home_club_id: number;
+  away_club_id: number;
+  home_score: number | null;
+  away_score: number | null;
+  attendance: number | null;
+  venue: string | null;
+  notes: string | null;
+  home: { name: string } | null;
+  away: { name: string } | null;
+  competition_season: {
+    display_name?: string | null;
+    competition: { name: string } | null;
+  } | null;
+  season: { label: string; slug: string } | null;
+};
+
+const U = "https://uwhewuwnrcvrnclfzoge.supabase.co";
+const K = "sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT";
+const H = { apikey: K, Authorization: `Bearer ${K}` };
+
+function displayDate(value: string | null) {
+  if (!value) return "Date not recorded";
+  return new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${value}T12:00:00`));
+}
+
+function PlayerRow({ player }: { player: Player }) {
+  return (
+    <div className="playerRow">
+      <b>{player.number ?? ""}</b>
+      <span>{player.name}{player.captain ? " (c)" : ""}</span>
+      <small>{player.position ?? ""}</small>
+    </div>
+  );
+}
+
+function MatchRecord() {
+  const id = useSearchParams().get("id");
+  const [match, setMatch] = useState<Match | null>(null);
+  const [lineups, setLineups] = useState<Lineup[]>([]);
+  const [nearby, setNearby] = useState<Match[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
+    const select = "id,played_on,season_id,round,home_club_id,away_club_id,home_score,away_score,attendance,venue,notes,home:clubs!matches_home_club_id_fkey(name),away:clubs!matches_away_club_id_fkey(name),competition_season:competition_seasons(display_name,competition:competitions(name)),season:seasons(label,slug)";
+
+    fetch(`${U}/rest/v1/matches?id=eq.${id}&select=${select}`, { headers: H })
+      .then((r) => r.json())
+      .then(async (rows: Match[]) => {
+        const current = rows[0] ?? null;
+        setMatch(current);
+        if (!current) return;
+
+        const [lineupRows, seasonRows] = await Promise.all([
+          fetch(`${U}/rest/v1/match_lineups?match_id=eq.${id}&select=club_id,formation,manager_name,starting_xi,substitutes`, { headers: H })
+            .then((r) => (r.ok ? r.json() : [])),
+          fetch(`${U}/rest/v1/matches?season_id=eq.${current.season_id}&select=${select}&order=played_on.asc`, { headers: H })
+            .then((r) => r.json()),
+        ]);
+
+        setLineups(lineupRows as Lineup[]);
+        setNearby(seasonRows as Match[]);
+      })
+      .catch(() => {
+        setMatch(null);
+        setLineups([]);
+        setNearby([]);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return <section className="matchLoading">Loading match centre…</section>;
+  }
+
+  if (!match) {
+    return (
+      <section className="archiveContent emptyState">
+        <strong>Match not found.</strong>
+        <span>The record may not have been backfilled yet.</span>
+        <Link href="/matches/">Browse all matches →</Link>
+      </section>
+    );
+  }
+
+  const home = match.home?.name ?? "Unknown";
+  const away = match.away?.name ?? "Unknown";
+  const competition = match.competition_season?.display_name ?? match.competition_season?.competition?.name ?? "Match";
+  const homeXI = lineups.find((row) => row.club_id === match.home_club_id);
+  const awayXI = lineups.find((row) => row.club_id === match.away_club_id);
+  const index = nearby.findIndex((row) => row.id === match.id);
+  const previous = index > 0 ? nearby[index - 1] : null;
+  const next = index >= 0 && index < nearby.length - 1 ? nearby[index + 1] : null;
+  const opponent = home.toLowerCase().includes("dunfermline") ? away : home;
+
+  return (
+    <>
+      <section className="mcHero">
+        <div className="mcInner">
+          <div className="meta">{competition.toUpperCase()} · {displayDate(match.played_on).toUpperCase()}</div>
+          <div className="scoreStage">
+            <div className="team"><ClubBadge name={home} size="lg" /><h1>{home}</h1></div>
+            <div className="score"><span>FULL TIME</span><div><strong>{match.home_score ?? "–"}</strong><i>:</i><strong>{match.away_score ?? "–"}</strong></div></div>
+            <div className="team"><ClubBadge name={away} size="lg" /><h1>{away}</h1></div>
+          </div>
+          <div className="facts">
+            <div><span>VENUE</span><b>{match.venue ?? "Not recorded"}</b></div>
+            <div><span>ATTENDANCE</span><b>{match.attendance?.toLocaleString("en-GB") ?? "Not recorded"}</b></div>
+            <div><span>SEASON</span><b>{match.season?.label ?? "Not recorded"}</b></div>
+            <div><span>LINE-UPS</span><b>{lineups.length ? "Available" : "Being backfilled"}</b></div>
+          </div>
+        </div>
+      </section>
+
+      <nav className="tabs"><a href="#overview">Overview</a><a href="#lineups">Line-ups</a><a href="#context">Explore</a></nav>
+
+      <main className="centre">
+        <section id="overview" className="section">
+          <p className="kicker">01 · MATCH OVERVIEW</p>
+          <h2>The result</h2>
+          <div className="overview"><ClubBadge name={home} size="md" /><strong>{match.home_score ?? "–"}</strong><span>FT</span><strong>{match.away_score ?? "–"}</strong><ClubBadge name={away} size="md" /></div>
+          {match.notes ? <p className="note">{match.notes}</p> : null}
+        </section>
+
+        <section id="lineups" className="section dark">
+          <p className="kicker">02 · LINE-UPS</p>
+          <h2>The teams</h2>
+          {lineups.length ? (
+            <div className="lineupGrid">
+              {[homeXI, awayXI].map((lineup, i) => {
+                const clubName = i === 0 ? home : away;
+                if (!lineup) {
+                  return <article className="sheet empty" key={clubName}><ClubBadge name={clubName} size="md" /><h3>{clubName}</h3><p>Line-up not yet backfilled.</p></article>;
+                }
+                return (
+                  <article className="sheet" key={lineup.club_id}>
+                    <header><ClubBadge name={clubName} size="md" /><div><h3>{clubName}</h3><p>{lineup.formation ?? "Formation not recorded"} · Manager: {lineup.manager_name ?? "Not recorded"}</p></div></header>
+                    <h4>STARTING XI</h4>
+                    <div>{lineup.starting_xi.map((player, j) => <PlayerRow player={player} key={`${player.name}-${j}`} />)}</div>
+                    <h4>SUBSTITUTES</h4>
+                    <div className="subs">{lineup.substitutes.map((player, j) => <span key={`${player.name}-${j}`}>{player.name}</span>)}</div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="noData"><strong>Line-ups are still being backfilled</strong><p>The match record is valid. Team-sheet detail will appear here when it is added to the archive.</p></div>
+          )}
+        </section>
+
+        <section id="context" className="section">
+          <p className="kicker">03 · KEEP EXPLORING</p>
+          <h2>Don't stop here.</h2>
+          <div className="actions">
+            {previous ? <Link href={`/match/?id=${previous.id}`}>← Previous match</Link> : null}
+            {match.season?.slug ? <Link href={`/season/?slug=${match.season.slug}`}>Explore {match.season.label} →</Link> : null}
+            <Link href={`/matches/?opponent=${encodeURIComponent(opponent)}`}>More vs {opponent} →</Link>
+            {next ? <Link href={`/match/?id=${next.id}`}>Next match →</Link> : null}
+          </div>
+        </section>
+      </main>
+    </>
+  );
+}
+
+export default function MatchDetail() {
+  return (
+    <main className="archivePage">
+      <Suspense fallback={<section className="matchLoading">Loading match centre…</section>}>
+        <MatchRecord />
+      </Suspense>
+      <style jsx global>{`
+        .mcHero{background:#090a0c;color:#fff;padding:3rem 6vw 0}.mcInner{max-width:1380px;margin:auto}.meta{text-align:center;color:#8b8e94;font-size:.62rem;font-weight:900;letter-spacing:.12em}.scoreStage{display:grid;grid-template-columns:1fr .8fr 1fr;align-items:center;gap:3rem;padding:4rem 0}.team{text-align:center}.team h1{font-size:clamp(1.8rem,3vw,3.3rem);line-height:.95}.score{text-align:center}.score>span{border:1px solid #3b3e44;padding:.4rem .7rem;font-size:.55rem}.score>div{display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:1rem}.score strong{font-size:clamp(5rem,9vw,9rem);line-height:.8}.score i{font-style:normal;color:#d51f2b;font-size:2rem}.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #2d3035}.facts div{text-align:center;padding:1.2rem;border-right:1px solid #2d3035}.facts span{display:block;color:#777;font-size:.5rem;letter-spacing:.12em}.tabs{position:sticky;top:76px;z-index:20;background:#fff;display:flex;justify-content:center;border-bottom:1px solid #ccc}.tabs a{padding:1rem 1.5rem;font-size:.62rem;font-weight:900;text-transform:uppercase}.centre{background:#f2efe7}.section{padding:5rem 6vw;max-width:1400px;margin:auto;scroll-margin-top:130px}.section h2{font-size:clamp(3rem,6vw,6rem);line-height:.9;margin:.5rem 0 2rem}.kicker{font-size:.6rem;color:#d51f2b;font-weight:900;letter-spacing:.14em}.overview{background:#fff;border:1px solid #ccc7bd;padding:2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem}.overview strong{font-size:4rem}.overview span{background:#111;color:#fff;padding:.3rem .5rem;font-size:.55rem}.note{background:#e6e0d5;border-left:4px solid #d51f2b;padding:1rem}.dark{max-width:none;background:#0d0e10;color:#fff}.dark>*{max-width:1220px;margin-left:auto;margin-right:auto}.lineupGrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333}.sheet{background:#17191c;padding:2rem}.sheet header{display:flex;align-items:center;gap:1rem;border-bottom:1px solid #34363a;padding-bottom:1.2rem}.sheet h4{font-size:.55rem;color:#d51f2b;letter-spacing:.12em;margin:1.5rem 0 .6rem}.playerRow{display:grid;grid-template-columns:36px 1fr auto;padding:.58rem 0;border-bottom:1px solid #292b2f}.subs{display:flex;flex-wrap:wrap;gap:.45rem}.subs span{background:#24262a;padding:.45rem .6rem;font-size:.68rem}.noData{background:#17191c;padding:4rem;text-align:center;color:#888}.actions{display:flex;gap:.6rem;flex-wrap:wrap}.actions a,.emptyState a{background:#111;color:#fff;padding:.9rem 1rem;font-size:.65rem;font-weight:900;text-transform:uppercase}.matchLoading{padding:8rem;text-align:center;background:#0b0c0e;color:#888;min-height:60vh}.emptyState{display:grid;gap:1rem;justify-items:start;min-height:50vh;padding:6rem}@media(max-width:800px){.scoreStage{grid-template-columns:1fr 1fr}.score{grid-column:1/-1;grid-row:1}.facts,.lineupGrid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.facts,.lineupGrid{grid-template-columns:1fr}.section{padding:4rem 5vw}.tabs{justify-content:flex-start;overflow:auto}}
+      `}</style>
+    </main>
+  );
+}
