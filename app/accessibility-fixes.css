@@ -1,0 +1,8 @@
+:where(a,button,input,select,[tabindex]):focus-visible{outline:3px solid #ffd82e;outline-offset:3px}
+.siteHeader :where(a,button,input):focus-visible{outline-color:#fff}
+.navDropdown a:focus-visible,.navGroup>button:focus-visible,.mobileMenu:focus-visible{position:relative;z-index:5}
+.playerSpot:focus-visible{outline:none}.playerSpot:focus-visible .shirt{filter:drop-shadow(0 0 0 #ffd82e) drop-shadow(0 0 7px #ffd82e);transform:translateY(-3px)}
+.h2hRow:focus-visible,.loanCard:focus-visible,.playerCard:focus-visible,.matchCard:focus-visible{outline-offset:-3px}
+.dateArrow,.mobileMenu{min-width:44px;min-height:44px}
+@media(max-width:780px){.navGroup>button,.navDropdown a,.globalSearch button,.clearFilters,.shareBtn,.profileBtn{min-height:44px}.dateArrow{width:44px;height:44px;flex-basis:44px}.positionFilters button,.decades button{min-height:40px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
