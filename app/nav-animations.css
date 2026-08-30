@@ -1,0 +1,40 @@
+.siteHeader{
+  transition:background-color .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+.brand,.navCrest,.brandWord,.navGroup>button,.globalSearch,.globalSearch button,.mobileMenu{
+  transition:transform .22s ease,color .22s ease,background-color .22s ease,border-color .22s ease,opacity .22s ease;
+}
+.brand:hover .navCrest{transform:rotate(-4deg) scale(1.04)}
+.brand:hover .brandWord{transform:translateX(2px)}
+.navGroup>button{position:relative;overflow:hidden}
+.navGroup>button:after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:3px;background:var(--pars-red,#d51f2b);transition:left .26s cubic-bezier(.2,.8,.2,1),right .26s cubic-bezier(.2,.8,.2,1)}
+.navGroup:hover>button:after,.navGroup.active>button:after,.navGroup.open>button:after{left:0;right:0}
+.navGroup>button>span{display:inline-block;transition:transform .24s cubic-bezier(.2,.8,.2,1),color .2s ease}
+.navGroup.open>button>span{transform:rotate(180deg)}
+.navDropdown{display:block!important;visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-8px) scale(.985);transform-origin:top left;transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1),visibility 0s linear .22s}
+.navGroup:hover .navDropdown,.navGroup.open .navDropdown{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0) scale(1);transition-delay:0s}
+.navDropdown a{opacity:0;transform:translateX(-7px);transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .22s ease,opacity .22s ease}
+.navGroup:hover .navDropdown a,.navGroup.open .navDropdown a{opacity:1;transform:translateX(0)}
+.navDropdown a:nth-child(1){transition-delay:.025s}.navDropdown a:nth-child(2){transition-delay:.045s}.navDropdown a:nth-child(3){transition-delay:.065s}.navDropdown a:nth-child(4){transition-delay:.085s}.navDropdown a:nth-child(5){transition-delay:.105s}.navDropdown a:nth-child(6){transition-delay:.125s}.navDropdown a:nth-child(7){transition-delay:.145s}.navDropdown a:nth-child(8){transition-delay:.165s}.navDropdown a:nth-child(9){transition-delay:.185s}
+.navDropdown a b{transition:transform .18s ease,color .18s ease}
+.navDropdown a:hover b{transform:translateX(4px);color:#fff}
+.globalSearch:focus-within{transform:translateY(-1px);border-color:#555;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.globalSearch button:hover{background:#ef2634}
+.mobileMenu:hover{background:#1b1b1b;transform:scale(1.04)}
+.mobileMenu i{transform-origin:center}
+@media(max-width:780px){
+  .mobileOpen .groupedNav{animation:mobileNavIn .28s cubic-bezier(.2,.8,.2,1) both}
+  .mobileOpen .globalSearch{animation:mobileNavIn .32s .05s cubic-bezier(.2,.8,.2,1) both}
+  .mobileOpen .navGroup{opacity:0;transform:translateY(-8px);animation:mobileGroupIn .3s cubic-bezier(.2,.8,.2,1) forwards}
+  .mobileOpen .navGroup:nth-child(1){animation-delay:.035s}.mobileOpen .navGroup:nth-child(2){animation-delay:.07s}.mobileOpen .navGroup:nth-child(3){animation-delay:.105s}
+  .navDropdown{display:none!important;visibility:visible;opacity:1;pointer-events:auto;transform:none;transition:none}
+  .navGroup.open .navDropdown{display:block!important;animation:mobileDropdownIn .22s ease both}
+  .navGroup.open .navDropdown a{opacity:1;transform:none}
+}
+@keyframes mobileNavIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mobileGroupIn{to{opacity:1;transform:none}}
+@keyframes mobileDropdownIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .siteHeader,.siteHeader *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .navDropdown,.navDropdown a{opacity:1;transform:none}
+}
