@@ -4,6 +4,7 @@ import "./design-upgrade.css";
 import "./nav-animations.css";
 import "./responsive-breakpoints.css";
 import "./motion-enhancements.css";
+import "./accessibility-fixes.css";
 import SiteHeader from "./components/SiteHeader";
 import MotionEnhancer from "./components/MotionEnhancer";
 import TimelineMotion from "./components/TimelineMotion";
