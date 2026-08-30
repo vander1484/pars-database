@@ -1,0 +1,127 @@
+/* Responsive breakpoint layer: loaded last to refine existing layouts without rewriting page styles. */
+
+@media (max-width:1280px){
+  .siteHeader{gap:1.25rem;padding-left:24px;padding-right:24px}
+  .groupedNav{gap:0}
+  .navGroup>button{padding-left:.7rem;padding-right:.7rem}
+  .hero,.currentSeason,.explore,.homeFeature,.homeClosing{padding-left:5vw;padding-right:5vw}
+  .archiveContent{padding-left:5vw;padding-right:5vw}
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media (max-width:1024px){
+  .hero{min-height:auto;padding-top:4rem;padding-bottom:4rem}
+  .heroContent{padding-top:4vh;max-width:760px}
+  .heroCrest{width:130px;height:130px;right:5vw;top:5vh}
+  .heroCrest .clubBadge-lg{width:120px;height:120px}
+  .seasonDashboard{grid-template-columns:1fr}
+  .sectionIntro{grid-template-columns:1fr}
+  .sectionIntro>p:last-child{margin-top:1.25rem;max-width:720px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .homeFeatureGrid{grid-template-columns:1fr 1fr}
+  .homeFeatureCard:first-child{grid-column:1/-1}
+  .archiveGrid{grid-template-columns:repeat(2,1fr)}
+  .filterPanel{grid-template-columns:1.5fr 1fr 1fr}
+  .filterPanel .clearFilters{grid-column:auto}
+  .matchRow{grid-template-columns:minmax(140px,.7fr) minmax(480px,2fr) 40px 30px}
+}
+
+@media (max-width:900px){
+  .archiveHero,.compactHero{padding-top:3rem;padding-bottom:3rem}
+  .archiveHero h1,.compactHero h1{font-size:clamp(2.8rem,9vw,4.8rem)}
+  .currentSeason{padding-top:4.5rem;padding-bottom:4.5rem}
+  .currentSeasonHead{align-items:flex-start;gap:1.25rem;flex-direction:column}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .homeFeature,.explore,.homeClosing{padding-top:5rem;padding-bottom:5rem}
+  .homeFeatureHead{align-items:flex-start;gap:1rem;flex-direction:column}
+  .playerTableHead,.playerTableRow{grid-template-columns:minmax(230px,2fr) 1fr 1fr 60px 60px 30px}
+  .leagueTableHead,.leagueTableRow{grid-template-columns:40px minmax(170px,2fr) repeat(8,50px)}
+}
+
+@media (max-width:780px){
+  html,body{overflow-x:hidden}
+  .hero,.currentSeason,.explore,.homeFeature,.homeClosing,.archiveHero,.compactHero{padding-left:20px;padding-right:20px}
+  .archiveContent{padding-left:20px;padding-right:20px}
+  .heroCrest{position:static;width:90px;height:90px;margin:0 0 1.5rem auto}
+  .heroCrest .clubBadge-lg{width:84px;height:84px}
+  .hero h1{font-size:clamp(3.2rem,15vw,5.6rem)}
+  .heroSearch{width:100%}
+  .stats{gap:0;padding-left:20px;padding-right:20px}
+  .stats div{min-width:0}
+  .grid,.archiveGrid,.homeFeatureGrid{grid-template-columns:1fr}
+  .homeFeatureCard:first-child{grid-column:auto}
+  .card{min-height:220px;padding:1.5rem}
+  .filterPanel{position:static;grid-template-columns:1fr 1fr;margin-bottom:1.5rem}
+  .clearFilters{min-height:50px}
+  .matchRow,.dataRow{min-width:0}
+  .matchRow{grid-template-columns:1fr;gap:.75rem;padding:1rem 0}
+  .matchTeams{grid-template-columns:minmax(0,1fr) 30px auto 30px minmax(0,1fr);gap:.45rem}
+  .teamName>span:last-child{font-size:.82rem}
+  .playerTable,.leagueTable{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .playerTableHead,.playerTableRow,.leagueTableHead,.leagueTableRow{min-width:720px}
+  .searchResult{grid-template-columns:48px minmax(0,1fr) 24px}
+  .searchSummary{flex-wrap:wrap}
+  .searchSummary strong{font-size:2.4rem}
+}
+
+@media (max-width:640px){
+  .hero,.currentSeason,.explore,.homeFeature,.homeClosing,.archiveHero,.compactHero{padding-left:18px;padding-right:18px}
+  .archiveContent{padding-left:18px;padding-right:18px}
+  .hero h1{font-size:clamp(3rem,16vw,4.8rem)}
+  .intro{font-size:1rem}
+  .heroSearch{grid-template-columns:1fr}
+  .heroSearch button{min-height:48px;width:100%}
+  .searchExamples{align-items:flex-start;flex-direction:column;gap:.35rem}
+  .stats{padding-left:18px;padding-right:18px}
+  .stats strong{font-size:1.45rem}
+  .stats span{line-height:1.25}
+  .homeFeatureCard{min-height:240px}
+  .homeFeatureCard h3{font-size:clamp(2.2rem,12vw,3.4rem)}
+  .archiveHero>p:last-child,.compactHero>p:last-child{font-size:.98rem}
+  .decadeGrid,.competitionGrid,.filterPanel{grid-template-columns:1fr}
+  .filterPanel label:first-child{grid-column:auto}
+  .fixtureTeams{grid-template-columns:1fr 24px 1fr;gap:.55rem}
+  .fixtureTeams strong{font-size:.82rem}
+  .miniTableHead,.miniTableRow{grid-template-columns:24px minmax(150px,1fr) 30px 32px 32px;padding-left:.7rem;padding-right:.7rem}
+  .archiveToolbar h2{font-size:2rem}
+  .searchSummary strong{font-size:2rem}
+}
+
+@media (max-width:480px){
+  .siteHeader{padding-left:12px;padding-right:12px}
+  .brandWord{font-size:1rem}
+  .navCrest{width:30px;flex-basis:30px;margin-right:.3rem}
+  .navCrest .clubBadge-sm{width:28px;height:28px}
+  .mobileMenu{width:44px;height:44px}
+  .hero,.currentSeason,.explore,.homeFeature,.homeClosing,.archiveHero,.compactHero{padding-left:16px;padding-right:16px}
+  .archiveContent{padding-left:16px;padding-right:16px}
+  .hero h1{font-size:clamp(2.8rem,17vw,4.2rem)}
+  .stats{padding:1.1rem 12px}
+  .stats strong{font-size:1.2rem}
+  .stats span{font-size:.48rem;letter-spacing:.08em}
+  .stats div{padding-left:.65rem}
+  .currentSeasonHead h2,.sectionIntro h2{font-size:clamp(2.5rem,13vw,3.5rem)}
+  .card{padding:1.25rem;min-height:200px}
+  .card h3{font-size:1.6rem;margin-top:2rem}
+  .homeFeatureCard{padding:1.35rem;min-height:220px}
+  .homeClosing h2{font-size:clamp(3rem,16vw,4rem)}
+  .matchTeams{grid-template-columns:minmax(0,1fr) 24px auto 24px minmax(0,1fr)}
+  .clubBadge-sm{width:32px;height:32px}
+  .teamName>span:last-child{font-size:.75rem}
+  .playerTable,.leagueTable{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+}
+
+@media (max-width:360px){
+  .brandWord{font-size:.9rem;letter-spacing:-.03em}
+  .siteHeader{grid-template-columns:minmax(0,1fr) 42px;gap:.25rem}
+  .hero h1{font-size:2.7rem}
+  .stats{grid-template-columns:1fr;gap:.65rem}
+  .stats div,.stats div:first-child{padding:0 0 .65rem;border-right:0;border-bottom:1px solid rgba(255,255,255,.28)}
+  .stats div:last-child{border-bottom:0;padding-bottom:0}
+  .stats strong{font-size:1.35rem}
+  .stats span{font-size:.55rem}
+  .homeFeatureCard h3{font-size:2.2rem}
+  .archiveHero h1,.compactHero h1{font-size:2.65rem}
+  .navGroup>button{font-size:.72rem}
+  .navDropdown a{font-size:.72rem}
+}
