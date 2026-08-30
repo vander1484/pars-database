@@ -9,6 +9,7 @@ import "./motion-enhancements.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollAnimations from "./components/ScrollAnimations";
 import MotionEnhancer from "./components/MotionEnhancer";
+import TimelineMotion from "./components/TimelineMotion";
 import PageTransition from "./components/PageTransition";
 
 export const metadata = {
@@ -17,5 +18,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><SiteHeader/><ScrollAnimations/><MotionEnhancer/><PageTransition>{children}</PageTransition></body></html>;
+  return <html lang="en"><body><SiteHeader/><ScrollAnimations/><MotionEnhancer/><TimelineMotion/><PageTransition>{children}</PageTransition></body></html>;
 }
