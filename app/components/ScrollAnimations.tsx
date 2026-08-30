@@ -20,6 +20,19 @@ const REVEAL_SELECTORS = [
   ".leagueTableRow",
 ].join(",");
 
+const TEXT_SELECTORS = [
+  "main h1",
+  "main h2",
+  "main h3",
+  "main .eyebrow",
+  "main .sectionIntro > p",
+  "main .archiveHero p",
+  "main .compactHero p",
+  "main .currentSeasonHead p",
+  "main .homeFeatureHead p",
+  "main .homeClosing p",
+].join(",");
+
 export default function ScrollAnimations() {
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -43,18 +56,26 @@ export default function ScrollAnimations() {
     }
 
     const elements = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTORS));
+    const textElements = Array.from(document.querySelectorAll<HTMLElement>(TEXT_SELECTORS));
 
     elements.forEach((element, index) => {
       element.classList.add("scrollReveal");
       element.style.setProperty("--scroll-delay", `${Math.min(index % 4, 3) * 55}ms`);
     });
 
+    textElements.forEach((element, index) => {
+      element.classList.add("textScrollReveal");
+      element.style.setProperty("--text-reveal-delay", `${Math.min(index % 3, 2) * 45}ms`);
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          (entry.target as HTMLElement).classList.add("scrollRevealVisible");
-          observer.unobserve(entry.target);
+          const element = entry.target as HTMLElement;
+          element.classList.add("scrollRevealVisible");
+          element.classList.add("textScrollRevealVisible");
+          observer.unobserve(element);
         });
       },
       {
@@ -63,7 +84,7 @@ export default function ScrollAnimations() {
       },
     );
 
-    elements.forEach((element) => observer.observe(element));
+    [...elements, ...textElements].forEach((element) => observer.observe(element));
 
     return () => {
       observer.disconnect();
