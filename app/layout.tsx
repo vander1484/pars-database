@@ -7,9 +7,8 @@ import "./motion-enhancements.css";
 import "./accessibility-fixes.css";
 import SiteHeader from "./components/SiteHeader";
 import MotionEnhancer from "./components/MotionEnhancer";
-import TimelineMotion from "./components/TimelineMotion";
-import PageTransition from "./components/PageTransition";
 import SupabaseFetchCache from "./components/SupabaseFetchCache";
+import PageTransition from "./components/PageTransition";
 
 export const metadata = {
   title: "Pars Database | Dunfermline Athletic Archive",
@@ -17,5 +16,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><SupabaseFetchCache/><SiteHeader/><MotionEnhancer/><TimelineMotion/><PageTransition>{children}</PageTransition></body></html>;
+  return <html lang="en"><body><SiteHeader/><SupabaseFetchCache/><MotionEnhancer/><PageTransition>{children}</PageTransition></body></html>;
 }
