@@ -1,4 +1,17 @@
 "use client";
-import {motion,useReducedMotion} from "motion/react";
+import {AnimatePresence,motion,useReducedMotion} from "motion/react";
 import {usePathname} from "next/navigation";
-export default function PageTransition({children}:{children:React.ReactNode}){const path=usePathname(),reduced=useReducedMotion();return <motion.div key={path} className="motionPage" initial={reduced?false:{opacity:0,y:14,filter:"blur(2px)"}} animate={{opacity:1,y:0,filter:"blur(0px)"}} transition={{duration:reduced?0:.42,ease:[.16,1,.3,1]}}>{children}</motion.div>}
+
+export default function PageTransition({children}:{children:React.ReactNode}){
+  const path=usePathname(),reduced=useReducedMotion();
+  return <AnimatePresence mode="wait" initial={false}>
+    <motion.div
+      key={path}
+      className="motionPage"
+      initial={reduced?false:{opacity:0,y:12,filter:"blur(1.5px)"}}
+      animate={{opacity:1,y:0,filter:"blur(0px)"}}
+      exit={reduced?undefined:{opacity:0,y:-8,filter:"blur(1px)"}}
+      transition={reduced?{duration:0}:{duration:.3,ease:[.16,1,.3,1]}}
+    >{children}</motion.div>
+  </AnimatePresence>
+}
