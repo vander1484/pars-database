@@ -32,20 +32,25 @@ body::-webkit-scrollbar-thumb:hover{background:#ef2634}
 .pageScrollProgress{position:fixed;z-index:10000;top:0;left:0;width:100%;height:3px;pointer-events:none;background:#d51f2b;transform:scaleX(var(--page-scroll-progress,0));transform-origin:left center;will-change:transform;box-shadow:0 0 8px rgba(213,31,43,.32)}
 
 @media(max-width:780px){
-  .mobileOpen .groupedNav{animation:mobileNavIn .28s cubic-bezier(.2,.8,.2,1) both}
-  .mobileOpen .globalSearch{animation:mobileNavIn .32s .05s cubic-bezier(.2,.8,.2,1) both}
-  .mobileOpen .navGroup{opacity:0;transform:translateY(-8px);animation:mobileGroupIn .3s cubic-bezier(.2,.8,.2,1) forwards}
+  .siteHeader.mobileOpen{height:100dvh!important;max-height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:70px auto auto;align-content:start}
+  .mobileOpen .groupedNav{display:block!important;grid-column:1/-1;width:100%;height:auto!important;opacity:1;visibility:visible;pointer-events:auto;animation:mobileNavIn .28s cubic-bezier(.2,.8,.2,1) both}
+  .mobileOpen .globalSearch{display:flex!important;grid-column:1/-1;width:100%;max-width:none;opacity:1;visibility:visible;pointer-events:auto;animation:mobileNavIn .32s .05s cubic-bezier(.2,.8,.2,1) both}
+  .mobileOpen .navGroup{display:block;opacity:1;transform:none;animation:mobileGroupIn .3s cubic-bezier(.2,.8,.2,1) both}
   .mobileOpen .navGroup:nth-child(1){animation-delay:.035s}.mobileOpen .navGroup:nth-child(2){animation-delay:.07s}.mobileOpen .navGroup:nth-child(3){animation-delay:.105s}
-  .navDropdown{display:none!important;visibility:visible;opacity:1;pointer-events:auto;transform:none;transition:none}
-  .navGroup.open .navDropdown{display:block!important;animation:mobileDropdownIn .22s ease both}
-  .navGroup.open .navDropdown a{opacity:1;transform:none}
+  .navGroup:hover .navDropdown{display:none!important}
+  .navDropdown{display:none!important;visibility:visible!important;opacity:1!important;pointer-events:auto;transform:none!important;transition:none!important}
+  .navGroup.open .navDropdown{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;animation:mobileDropdownIn .22s ease both}
+  .navGroup.open .navDropdown a{opacity:1!important;transform:none!important}
+  .mobileOpen .navGroup>button{pointer-events:auto;touch-action:manipulation}
+  .mobileOpen .navDropdown a{pointer-events:auto;touch-action:manipulation}
   .pageScrollProgress{height:2px}
 }
 @keyframes mobileNavIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
-@keyframes mobileGroupIn{to{opacity:1;transform:none}}
+@keyframes mobileGroupIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @keyframes mobileDropdownIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){
   .siteHeader,.siteHeader *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .navDropdown,.navDropdown a{opacity:1;transform:none}
+  .mobileOpen .groupedNav,.mobileOpen .globalSearch,.mobileOpen .navGroup,.navDropdown,.navDropdown a{opacity:1!important;transform:none!important}
+  .navGroup.open .navDropdown{display:block!important;visibility:visible!important;pointer-events:auto!important}
   .pageScrollProgress{box-shadow:none}
 }
