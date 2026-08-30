@@ -23,7 +23,24 @@ const REVEAL_SELECTORS = [
 export default function ScrollAnimations() {
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) return;
+    const root = document.documentElement;
+
+    const updateProgress = () => {
+      const scrollable = root.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? Math.min(Math.max(window.scrollY / scrollable, 0), 1) : 0;
+      root.style.setProperty("--page-scroll-progress", String(progress));
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    if (reducedMotion.matches) {
+      return () => {
+        window.removeEventListener("scroll", updateProgress);
+        window.removeEventListener("resize", updateProgress);
+      };
+    }
 
     const elements = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTORS));
 
@@ -48,8 +65,12 @@ export default function ScrollAnimations() {
 
     elements.forEach((element) => observer.observe(element));
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
   }, []);
 
-  return null;
+  return <div className="pageScrollProgress" aria-hidden="true" />;
 }
