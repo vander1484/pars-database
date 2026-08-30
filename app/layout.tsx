@@ -4,6 +4,7 @@ import "./design-upgrade.css";
 import "./nav-animations.css";
 import "./text-reveal.css";
 import "./page-transitions.css";
+import "./responsive-breakpoints.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollAnimations from "./components/ScrollAnimations";
 
