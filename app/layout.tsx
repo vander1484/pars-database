@@ -2,6 +2,7 @@ import "./globals.css";
 import "./qa-fixes.css";
 import "./design-upgrade.css";
 import "./nav-animations.css";
+import "./text-reveal.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollAnimations from "./components/ScrollAnimations";
 
