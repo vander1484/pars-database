@@ -5,8 +5,11 @@ import "./nav-animations.css";
 import "./text-reveal.css";
 import "./page-transitions.css";
 import "./responsive-breakpoints.css";
+import "./motion-enhancements.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollAnimations from "./components/ScrollAnimations";
+import MotionEnhancer from "./components/MotionEnhancer";
+import PageTransition from "./components/PageTransition";
 
 export const metadata = {
   title: "Pars Database | Dunfermline Athletic Archive",
@@ -14,5 +17,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><SiteHeader/><ScrollAnimations/>{children}</body></html>;
+  return <html lang="en"><body><SiteHeader/><ScrollAnimations/><MotionEnhancer/><PageTransition>{children}</PageTransition></body></html>;
 }
