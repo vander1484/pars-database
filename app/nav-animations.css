@@ -34,8 +34,9 @@ html::-webkit-scrollbar-thumb:hover,body::-webkit-scrollbar-thumb:hover{backgrou
   .siteHeader.mobileOpen{height:100dvh!important;max-height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:70px auto auto;align-content:start}
   .mobileOpen .groupedNav{display:block!important;grid-column:1/-1;width:100%;height:auto!important;opacity:1;visibility:visible;pointer-events:auto;animation:mobileNavIn .28s cubic-bezier(.2,.8,.2,1) both}
   .mobileOpen .globalSearch{display:flex!important;grid-column:1/-1;width:100%;max-width:none;opacity:1;visibility:visible;pointer-events:auto;animation:mobileNavIn .32s .05s cubic-bezier(.2,.8,.2,1) both}
+  .mobileOpen .timelineTopLink{animation:mobileGroupIn .3s .025s cubic-bezier(.2,.8,.2,1) both}
   .mobileOpen .navGroup{display:block;opacity:1;transform:none;animation:mobileGroupIn .3s cubic-bezier(.2,.8,.2,1) both}
-  .mobileOpen .navGroup:nth-child(1){animation-delay:.035s}.mobileOpen .navGroup:nth-child(2){animation-delay:.07s}.mobileOpen .navGroup:nth-child(3){animation-delay:.105s}
+  .mobileOpen .navGroup:nth-child(2){animation-delay:.055s}.mobileOpen .navGroup:nth-child(3){animation-delay:.085s}.mobileOpen .navGroup:nth-child(4){animation-delay:.115s}
   .navGroup:hover .navDropdown{display:none!important}
   .navDropdown{display:none!important;visibility:visible!important;opacity:1!important;pointer-events:auto;transform:none!important;transition:none!important}
   .navGroup.open .navDropdown{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;animation:mobileDropdownIn .22s ease both}
@@ -43,6 +44,10 @@ html::-webkit-scrollbar-thumb:hover,body::-webkit-scrollbar-thumb:hover{backgrou
   .mobileOpen .navGroup>button{pointer-events:auto;touch-action:manipulation}
   .mobileOpen .navDropdown a{pointer-events:auto;touch-action:manipulation}
   .navMotionIndicator{height:2px}
+}
+@media(min-width:781px){
+  body{overflow:auto!important}
+  .siteHeader.mobileOpen{height:76px!important;max-height:none!important;overflow:visible!important}
 }
 @keyframes mobileNavIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
 @keyframes mobileGroupIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
