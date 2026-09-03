@@ -95,6 +95,8 @@ export default function MobileSeasonAccordion() {
         cursor: pointer;
       }
 
+      .mobileSeasonToggle:active { background: #f7f5ef; }
+
       .mobileSeasonToggle > span:first-child {
         font-size: 1rem;
         font-weight: 800;
@@ -113,8 +115,10 @@ export default function MobileSeasonAccordion() {
         font-weight: 800;
         line-height: 1;
         transform: rotate(180deg);
-        transition: transform 180ms ease;
+        transition: transform 180ms cubic-bezier(.16,1,.3,1), background-color 180ms cubic-bezier(.16,1,.3,1);
       }
+
+      .mobileSeasonToggle[aria-expanded="true"] .mobileSeasonChevron { background: #ebe7de; }
 
       .mobileSeasonPanel.is-collapsed > :not(.mobileSeasonToggle),
       .mobileSeasonSummaryPanel.is-collapsed > :not(.mobileSeasonToggle) {
@@ -159,6 +163,10 @@ export default function MobileSeasonAccordion() {
         padding-left: 0.85rem;
         padding-right: 0.85rem;
       }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mobileSeasonChevron { transition: none !important; }
     }
   `}</style>;
 }
