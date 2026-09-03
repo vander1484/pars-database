@@ -5,6 +5,7 @@ import "./nav-animations.css";
 import "./responsive-breakpoints.css";
 import "./motion-enhancements.css";
 import "./accessibility-fixes.css";
+import "./ux-hardening.css";
 import SiteHeader from "./components/SiteHeader";
 import MotionEnhancer from "./components/MotionEnhancer";
 import SupabaseFetchCache from "./components/SupabaseFetchCache";
@@ -17,5 +18,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><head><link rel="preconnect" href="https://uwhewuwnrcvrnclfzoge.supabase.co" crossOrigin="anonymous"/><link rel="dns-prefetch" href="https://uwhewuwnrcvrnclfzoge.supabase.co"/></head><body><SiteHeader/><SupabaseFetchCache/><MotionEnhancer/><MobileSeasonAccordion/><PageTransition>{children}</PageTransition></body></html>;
+  return <html lang="en"><head><link rel="preconnect" href="https://uwhewuwnrcvrnclfzoge.supabase.co" crossOrigin="anonymous"/><link rel="dns-prefetch" href="https://uwhewuwnrcvrnclfzoge.supabase.co"/></head><body><a className="skipLink" href="#main-content">Skip to archive content</a><SiteHeader/><SupabaseFetchCache/><MotionEnhancer/><MobileSeasonAccordion/><PageTransition>{children}</PageTransition></body></html>;
 }
