@@ -1,8 +1,8 @@
 .motionPage{min-height:calc(100vh - 76px)}
-.motionScrollProgress{position:fixed;z-index:10001;top:0;left:0;width:100%;height:3px;background:var(--pars-red,#d51f2b);transform-origin:0 50%;pointer-events:none;box-shadow:0 0 12px rgba(213,31,43,.4)}
-.motionAmbient{position:fixed;z-index:-1;right:-12vw;top:18vh;width:36vw;height:36vw;border-radius:50%;background:radial-gradient(circle,rgba(213,31,43,.055),transparent 68%);pointer-events:none}
+.motionScrollProgress{position:fixed;z-index:10001;top:0;left:0;width:100%;height:3px;background:var(--pars-red,#d51f2b);transform-origin:0 50%;pointer-events:none}
 .otdStories{touch-action:pan-y}
-.playerSpot{touch-action:none}.playerSpot.filled{cursor:grab}.playerSpot.filled:active{cursor:grabbing}.pitch .playerSpot.active{animation:motionSlotPulse 1.5s ease-in-out infinite}
-@keyframes motionSlotPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(213,31,43,0))}50%{filter:drop-shadow(0 0 9px rgba(213,31,43,.45))}}
-@media(max-width:780px){.motionPage{min-height:calc(100vh - 70px)}.motionScrollProgress{height:2px}.motionAmbient{display:none}}
-@media(prefers-reduced-motion:reduce){.motionScrollProgress,.motionAmbient{display:none}.pitch .playerSpot.active{animation:none!important}}
+.playerSpot{touch-action:none}.playerSpot.filled{cursor:grab}.playerSpot.filled:active{cursor:grabbing}
+/* Active team-picker slots use a static state treatment. Repeated pulsing adds noise to a high-frequency interaction. */
+.pitch .playerSpot.active{filter:drop-shadow(0 0 7px rgba(213,31,43,.35))}
+@media(max-width:780px){.motionPage{min-height:calc(100vh - 70px)}.motionScrollProgress{height:2px}}
+@media(prefers-reduced-motion:reduce){.motionScrollProgress{display:none}.pitch .playerSpot.active{filter:none}}
