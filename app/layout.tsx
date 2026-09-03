@@ -9,6 +9,7 @@ import SiteHeader from "./components/SiteHeader";
 import MotionEnhancer from "./components/MotionEnhancer";
 import SupabaseFetchCache from "./components/SupabaseFetchCache";
 import PageTransition from "./components/PageTransition";
+import MobileSeasonAccordion from "./components/MobileSeasonAccordion";
 
 export const metadata = {
   title: "Pars Database | Dunfermline Athletic Archive",
@@ -16,5 +17,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><head><link rel="preconnect" href="https://uwhewuwnrcvrnclfzoge.supabase.co" crossOrigin="anonymous"/><link rel="dns-prefetch" href="https://uwhewuwnrcvrnclfzoge.supabase.co"/></head><body><SiteHeader/><SupabaseFetchCache/><MotionEnhancer/><PageTransition>{children}</PageTransition></body></html>;
+  return <html lang="en"><head><link rel="preconnect" href="https://uwhewuwnrcvrnclfzoge.supabase.co" crossOrigin="anonymous"/><link rel="dns-prefetch" href="https://uwhewuwnrcvrnclfzoge.supabase.co"/></head><body><SiteHeader/><SupabaseFetchCache/><MotionEnhancer/><MobileSeasonAccordion/><PageTransition>{children}</PageTransition></body></html>;
 }
