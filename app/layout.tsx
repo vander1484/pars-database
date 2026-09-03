@@ -6,6 +6,7 @@ import "./responsive-breakpoints.css";
 import "./motion-enhancements.css";
 import "./accessibility-fixes.css";
 import "./ux-hardening.css";
+import "./page-pass.css";
 import SiteHeader from "./components/SiteHeader";
 import MotionEnhancer from "./components/MotionEnhancer";
 import SupabaseFetchCache from "./components/SupabaseFetchCache";
