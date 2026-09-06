@@ -1,0 +1,48 @@
+import type {CuratedEvent} from './curated';
+
+// Manager appointment dates are kept in step with the club's Managers archive.
+// Appointments already represented as curated On This Day milestones are omitted
+// here so they do not render twice.
+export const managerAppointmentEvents: CuratedEvent[] = [
+  {n:1001,year:1925,month:5,day:31,title:'Sandy Paterson is appointed manager',competition:'Manager',milestone:true},
+  {n:1002,year:1930,month:5,day:31,title:'Willie Knight returns as manager',competition:'Manager',milestone:true},
+  {n:1003,year:1936,month:6,day:5,title:'David Taylor is appointed manager',competition:'Manager',milestone:true},
+  {n:1004,year:1938,month:5,day:4,title:'Peter Wilson is appointed manager',competition:'Manager',milestone:true},
+  {n:1005,year:1939,month:10,day:12,title:'Sandy Archibald is appointed manager',competition:'Manager',milestone:true},
+  {n:1006,year:1947,month:2,day:13,title:'Willie McAndrew is appointed manager',competition:'Manager',milestone:true},
+  {n:1007,year:1947,month:8,day:1,title:'Bobby Calder is appointed manager',competition:'Manager',milestone:true},
+  {n:1008,year:1948,month:8,day:1,title:'Sandy Terris is appointed manager',competition:'Manager',milestone:true},
+  {n:1009,year:1949,month:7,day:31,title:'Webber Lees is appointed manager',competition:'Manager',milestone:true},
+  {n:1010,year:1951,month:8,day:1,title:'Tom Younger is appointed manager',competition:'Manager',milestone:true},
+  {n:1011,year:1952,month:8,day:1,title:'Bobby Ancell is appointed manager',competition:'Manager',milestone:true},
+  {n:1012,year:1955,month:8,day:1,title:'Andy Dickson is appointed manager',competition:'Manager',milestone:true},
+  {n:1013,year:1964,month:3,day:30,title:'Willie Cunningham is appointed manager',competition:'Manager',milestone:true},
+  {n:1014,year:1967,month:7,day:17,title:'George Farm is appointed manager',competition:'Manager',milestone:true,note:'Farm went on to lead the Pars to the 1967/68 Scottish Cup.'},
+  {n:1015,year:1970,month:10,day:1,title:'Andy Stevenson takes caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1016,year:1970,month:10,day:22,title:'Alex Wright is appointed manager',competition:'Manager',milestone:true},
+  {n:1017,year:1972,month:2,day:22,title:'George Miller is appointed manager',competition:'Manager',milestone:true},
+  {n:1018,year:1975,month:8,day:31,title:'Jimmy Thomson takes caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1019,year:1975,month:9,day:20,title:'Harry Melrose is appointed manager',competition:'Manager',milestone:true},
+  {n:1020,year:1980,month:12,day:16,title:'Pat Stanton is appointed manager',competition:'Manager',milestone:true},
+  {n:1021,year:1982,month:9,day:2,title:'Jimmy Thomson takes caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1022,year:1982,month:9,day:20,title:'Tom Forsyth is appointed manager',competition:'Manager',milestone:true},
+  {n:1023,year:1990,month:7,day:27,title:'Iain Munro is appointed manager',competition:'Manager',milestone:true},
+  {n:1024,year:1991,month:9,day:20,title:'Jocky Scott is appointed manager',competition:'Manager',milestone:true},
+  {n:1025,year:1999,month:1,day:6,title:'Dick Campbell is appointed manager',competition:'Manager',milestone:true},
+  {n:1026,year:1999,month:11,day:2,title:'Jimmy Nicholl takes caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1027,year:2004,month:6,day:17,title:'David Hay is appointed manager',competition:'Manager',milestone:true},
+  {n:1028,year:2005,month:5,day:3,title:'Jim Leishman returns as manager',competition:'Manager',milestone:true},
+  {n:1029,year:2006,month:10,day:26,title:'Craig Robertson takes caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1030,year:2006,month:11,day:10,title:'Stephen Kenny is appointed manager',competition:'Manager',milestone:true,note:'Kenny later led Dunfermline to the 2006/07 Scottish Cup final.'},
+  {n:1031,year:2007,month:12,day:4,title:'Jim McIntyre takes caretaker charge',competition:'Manager',milestone:true,note:'McIntyre initially took caretaker charge before being appointed permanently on 3 January 2008.'},
+  {n:1032,year:2012,month:3,day:21,title:'Jim Jefferies is appointed manager',competition:'Manager',milestone:true},
+  {n:1033,year:2014,month:12,day:16,title:'John Potter is appointed manager',competition:'Manager',milestone:true},
+  {n:1034,year:2015,month:5,day:8,title:'Allan Johnston is appointed manager',competition:'Manager',milestone:true,note:'Johnston led the Pars to the League One title in 2015/16.'},
+  {n:1035,year:2019,month:1,day:10,title:'Stevie Crawford is appointed manager',competition:'Manager',milestone:true},
+  {n:1036,year:2021,month:5,day:28,title:'Peter Grant is appointed manager',competition:'Manager',milestone:true},
+  {n:1037,year:2021,month:10,day:31,title:'Greg Shields and Steven Whittaker take caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1038,year:2021,month:11,day:12,title:'John Hughes is appointed manager',competition:'Manager',milestone:true},
+  {n:1039,year:2024,month:12,day:23,title:'John McLaughlan takes caretaker charge',competition:'Manager',milestone:true,note:'Caretaker appointment.'},
+  {n:1040,year:2025,month:1,day:17,title:'Michael Tidser is appointed manager',competition:'Manager',milestone:true},
+  {n:1041,year:2025,month:3,day:21,title:'Neil Lennon is appointed manager',competition:'Manager',milestone:true}
+];
