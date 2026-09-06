@@ -1,8 +1,7 @@
 import type {CuratedEvent} from './curated';
 
-// Verified debut dates are drawn from the player career archive already used by
-// the Pars Database. This first collection deliberately favours substantial
-// long-serving players rather than turning every first appearance into an event.
+// Verified player dates from the Pars player archive and contemporary/official
+// club reports. Milestones are only included where an exact date is supported.
 export const playerMilestoneEvents: CuratedEvent[] = [
   {n:2001,year:1959,month:8,day:26,title:'George Miller makes his Pars debut',competition:'Notable Debut',note:'Miller went on to make 238 appearances for Dunfermline.',milestone:true},
   {n:2002,year:1960,month:10,day:8,title:'Jim Herriot makes his Pars debut',competition:'Notable Debut',note:'Herriot went on to make 151 appearances for the club.',milestone:true},
@@ -30,5 +29,14 @@ export const playerMilestoneEvents: CuratedEvent[] = [
   {n:2024,year:1978,month:9,day:6,title:'Kevin Hegarty makes his Pars debut',competition:'Notable Debut',note:'Hegarty went on to make 156 appearances for Dunfermline.',milestone:true},
   {n:2025,year:1981,month:8,day:8,title:'Bobby Forrest makes his Pars debut',competition:'Notable Debut',note:'Forrest went on to make 221 appearances for the club.',milestone:true},
   {n:2026,year:1981,month:10,day:24,title:'Norrie McCathie makes his Pars debut',competition:'Notable Debut',note:'McCathie went on to make a club-record 572 appearances and became one of the defining figures in Pars history.',milestone:true},
-  {n:2027,year:1983,month:12,day:17,title:'John Watson makes his Pars debut',competition:'Notable Debut',note:'Watson went on to make 214 appearances and score 85 goals.',milestone:true}
+  {n:2027,year:1983,month:12,day:17,title:'John Watson makes his Pars debut',competition:'Notable Debut',note:'Watson went on to make 214 appearances and score 85 goals.',milestone:true},
+
+  {n:2101,year:2005,month:11,day:19,title:'Andy Tod makes his 300th league appearance',competition:'Appearance Milestone',note:'Tod reached 300 Scottish League appearances for Dunfermline against Livingston.',milestone:true},
+  {n:2102,year:2011,month:4,day:30,title:'Gary Mason makes his 250th league appearance',competition:'Appearance Milestone',note:'Mason became only the fourteenth player in club history to reach 250 league appearances for the Pars.',milestone:true},
+  {n:2103,year:2011,month:11,day:23,title:'David Graham makes his 100th Pars appearance',competition:'Appearance Milestone',note:'Graham reached 100 appearances in the SPL match away to Celtic.',milestone:true},
+  {n:2104,year:2016,month:12,day:10,title:'Michael Moffat makes his 100th Pars appearance',competition:'Appearance Milestone',note:'Moffat marked the occasion by scoring twice in a 2-1 win over Morton.',milestone:true},
+  {n:2105,year:2017,month:9,day:16,title:'Sean Murdoch makes his 100th Pars appearance',competition:'Appearance Milestone',note:'Murdoch celebrated with his 35th Dunfermline clean sheet as the Pars beat St Mirren 3-0.',milestone:true},
+  {n:2106,year:2024,month:3,day:15,title:'Matty Todd makes his 100th Pars appearance',competition:'Appearance Milestone',note:'Todd scored the opening goal as Dunfermline beat league leaders Dundee United 3-1.',milestone:true},
+  {n:2107,year:2024,month:9,day:13,title:'Lewis McCann makes his 150th Pars appearance',competition:'Appearance Milestone',note:'McCann reached 150 appearances in a 2-0 Fife derby victory over Raith Rovers.',milestone:true},
+  {n:2108,year:2025,month:7,day:19,title:'Deniz Mehmet makes his 100th Pars appearance',competition:'Appearance Milestone',note:'Mehmet marked his 100th appearance with a clean sheet in a 4-0 League Cup win at Dumbarton.',milestone:true}
 ];
