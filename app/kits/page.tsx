@@ -2,7 +2,7 @@
 import Link from "next/link";
 import {useState} from "react";
 
-const KIT={season:"1989/90",type:"Home",manufacturer:"Umbro",sponsor:"Landmark Home Furnishing",asset:"/pars-database/kits/1989-90/home-v1.webp"};
+const KIT={season:"1989/90",type:"Home",manufacturer:"Umbro",sponsor:"Landmark Home Furnishing",asset:"/pars-database/kits/1989-90/home-v1-transparent.webp"};
 
 export default function KitsPage(){
  const [view,setView]=useState<"full"|"shirt">("full");
