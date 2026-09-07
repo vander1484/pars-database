@@ -2,7 +2,7 @@
 import Link from "next/link";
 import {useState} from "react";
 
-const KIT={season:"1989/90",type:"Home",manufacturer:"Umbro",sponsor:"Landmark Home Furnishing",asset:"/kits/1989-90/home-v1.svg"};
+const KIT={season:"1989/90",type:"Home",manufacturer:"Umbro",sponsor:"Landmark Home Furnishing",asset:"/pars-database/kits/1989-90/home-v1.svg"};
 
 export default function KitsPage(){
  const [view,setView]=useState<"full"|"shirt">("full");
@@ -26,7 +26,7 @@ export default function KitsPage(){
     <p className="eyebrow dark">HOME · VERSION 1</p><h2>1989/90</h2><p className="lead">Broad black and white stripes. Umbro. Landmark. A distinctly late-eighties Pars strip.</p>
     <dl><div><dt>Manufacturer</dt><dd>Umbro</dd></div><div><dt>Sponsor</dt><dd>Landmark Home Furnishing</dd></div><div><dt>Colours</dt><dd>Black &amp; white</dd></div><div><dt>Season</dt><dd>1989/90</dd></div></dl>
     <div className="evidence"><span>RECONSTRUCTION STATUS</span><strong>Evidence-led</strong><p>The archive illustration is a reconstruction rather than a photograph. Details will be refined whenever stronger period evidence becomes available.</p></div>
-    <Link href="/season/?season=1989-90">Explore the 1989/90 season →</Link>
+    <Link href="/season/?slug=1989-90">Explore the 1989/90 season →</Link>
    </article>
   </section>
 
