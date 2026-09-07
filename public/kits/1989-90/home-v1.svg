@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Dunfermline Athletic 1989/90 home kit reconstruction</title>
+<desc id="desc">Flat front-facing reconstruction of the 1989/90 Dunfermline Athletic home shirt, black shorts and black socks.</desc>
+<defs>
+  <clipPath id="shirtClip"><path d="M290 130 L390 80 L465 105 Q500 130 535 105 L610 80 L710 130 L675 265 L620 235 L620 600 Q500 635 380 600 L380 235 L325 265 Z"/></clipPath>
+  <pattern id="stripes" width="92" height="40" patternUnits="userSpaceOnUse"><rect width="46" height="40" fill="#f8f8f5"/><rect x="46" width="46" height="40" fill="#111"/></pattern>
+</defs>
+<rect width="1200" height="900" fill="none"/>
+<g id="shirt">
+  <path d="M290 130 L390 80 L465 105 Q500 130 535 105 L610 80 L710 130 L675 265 L620 235 L620 600 Q500 635 380 600 L380 235 L325 265 Z" fill="url(#stripes)" stroke="#111" stroke-width="5"/>
+  <g clip-path="url(#shirtClip)"><rect x="260" y="80" width="480" height="560" fill="url(#stripes)"/></g>
+  <path d="M430 92 Q500 145 570 92 L550 145 Q500 175 450 145 Z" fill="#f8f8f5" stroke="#111" stroke-width="4"/>
+  <path d="M447 119 Q500 158 553 119" fill="none" stroke="#d21f2b" stroke-width="8"/>
+  <path d="M447 130 Q500 169 553 130" fill="none" stroke="#111" stroke-width="6"/>
+  <path d="M299 224 L334 237" stroke="#d21f2b" stroke-width="7"/><path d="M666 237 L701 224" stroke="#d21f2b" stroke-width="7"/>
+  <g transform="translate(414 205)"><path d="M0 0 h56 v40 h-56z" fill="#fff" fill-opacity=".88"/><path d="M8 10 l20 -8 20 8 -20 8z" fill="none" stroke="#d21f2b" stroke-width="5"/><text x="28" y="34" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#d21f2b">umbro</text></g>
+  <g transform="translate(540 188)"><path d="M0 0 L70 0 L35 62 Z" fill="#111" stroke="#fff" stroke-width="4"/><text x="35" y="17" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#fff">D·A·F·C</text><path d="M13 23 L57 23 L35 53 Z" fill="#2459a6"/><path d="M22 28 L48 28 L35 48 Z" fill="#f2c62e"/></g>
+  <g transform="translate(360 330)"><rect x="0" y="0" width="280" height="102" rx="6" fill="#fff" fill-opacity=".92"/><text x="140" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="56" font-style="italic" font-weight="700" fill="#d21f2b">Landmark</text><text x="140" y="82" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#111" letter-spacing="2">HOME FURNISHING</text></g>
+</g>
+<g id="shorts" transform="translate(290 640)"><path d="M0 0 Q210 -24 420 0 L395 215 L220 225 L210 165 L200 225 L25 215 Z" fill="#111" stroke="#111" stroke-width="5"/><path d="M12 10 Q210 -12 408 10" fill="none" stroke="#2c2c2c" stroke-width="12"/><g transform="translate(58 120)"><path d="M0 0 L52 0 L26 45 Z" fill="#fff" stroke="#111" stroke-width="3"/><text x="26" y="14" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700">D·A·F·C</text><path d="M10 18 L42 18 L26 39 Z" fill="#2459a6"/></g><g transform="translate(326 132)"><path d="M0 0 l20 -8 20 8 -20 8z" fill="none" stroke="#d21f2b" stroke-width="5"/><text x="20" y="28" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#d21f2b">umbro</text></g></g>
+<g id="socks" transform="translate(780 615)"><g><path d="M0 0 H88 L80 235 Q44 255 8 235 Z" fill="#111"/><rect x="0" y="42" width="88" height="18" fill="#f4f4f1"/><rect x="0" y="70" width="88" height="18" fill="#f4f4f1"/></g><g transform="translate(118 0)"><path d="M0 0 H88 L80 235 Q44 255 8 235 Z" fill="#111"/><rect x="0" y="42" width="88" height="18" fill="#f4f4f1"/><rect x="0" y="70" width="88" height="18" fill="#f4f4f1"/></g></g>
+</svg>
