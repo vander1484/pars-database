@@ -7,7 +7,7 @@ import ClubBadge from "./ClubBadge";
 
 const U="https://uwhewuwnrcvrnclfzoge.supabase.co",K="sb_publishable_3qBGcpu8I6fytBGxdhJDNA_zOklTBeT",H={apikey:K,Authorization:`Bearer ${K}`};
 const groups=[
- {label:'Archive',items:[['/players','Players'],['/matches','Matches'],['/head-to-head','Head-to-Head'],['/seasons','Seasons'],['/transfers','Transfers'],['/competitions','Competitions']]},
+ {label:'Archive',items:[['/players','Players'],['/matches','Matches'],['/head-to-head','Head-to-Head'],['/seasons','Seasons'],['/kits','Kit Archive'],['/transfers','Transfers'],['/competitions','Competitions']]},
  {label:'Club',items:[['/managers','Managers'],['/records','Honours & Records'],['/greatest-50','Greatest 50'],['/europe','European History']]},
  {label:'Interactive',items:[['/interactive','Games Hub'],['/team-picker','Ultimate XI'],['/on-this-day','On This Day'],['/polls','Supporter Polls'],['/polls/cult-heroes','Cult Heroes Poll'],['/interactive/pardle','Pardle'],['/interactive/career-path','Career Path'],['/interactive/higher-lower','Higher or Lower'],['/interactive/starting-xi','Starting XI']]}
 ];
