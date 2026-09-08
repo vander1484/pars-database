@@ -1,0 +1,5 @@
+/* Keep related supporter polls vertically grouped in the two-column Games menu. */
+@media (min-width:781px){
+  .navV3 .navGroup .megaLinks>a[href="/interactive/pardle"]{order:5}
+  .navV3 .navGroup .megaLinks>a[href="/polls/cult-heroes"]{order:6}
+}
