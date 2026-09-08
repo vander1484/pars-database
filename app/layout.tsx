@@ -2,6 +2,7 @@ import "./globals.css";
 import "./qa-fixes.css";
 import "./design-upgrade.css";
 import "./nav-animations.css";
+import "./nav-order-fix.css";
 import "./responsive-breakpoints.css";
 import "./motion-enhancements.css";
 import "./accessibility-fixes.css";
